@@ -1,0 +1,183 @@
+@import "variables.scss";
+
+@mixin div-with-bgImage($url) {
+  background-image: url($url);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+@mixin vendor-prefix($name, $value) {
+  @each $vendor in ('-webkit-', '-moz-', '-ms-', '-o-', '') {
+    #{$vendor}#{$name}: #{$value};
+  }
+}
+
+* {
+  @include vendor-prefix('box-sizing', 'border-box');
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: $bg-color;
+  color: $font-color;
+}
+
+img, .images {
+  margin: auto;
+  max-width: 100%;
+}
+
+#logo {
+  width: 39px;
+  height: 13px;
+  @include div-with-bgImage('../images/Logo.png');
+  left: 1rem;
+  top: 1rem;
+  position: fixed;
+}
+
+.fixed-layer {
+  position: fixed;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  height: 100%;
+
+  nav {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: flex-start;
+    position: absolute;
+    width: 200px;
+    background: linear-gradient(to right, rgba(0,0,0,1), rgba(0,0,0,0))
+  }
+
+  .anchors {
+    margin: 0.3rem 1rem;
+    text-decoration: none;
+    color: $nav-list-color;
+    &.active {
+      color: $nav-active-color;
+      &:after {
+        content: '';
+        display: inline-block;
+        width: 0;
+        height: 0;
+        margin: 0 0 0 $list-arrow-size;
+        border-top: $list-arrow-size solid transparent;
+        border-right: $list-arrow-size*1.6 solid #fff;
+        border-bottom: $list-arrow-size solid transparent;
+      }
+      &:hover {
+        color: $font-color;
+      }
+    }
+    &:hover {
+      cursor: pointer;
+      color: $nav-hover-color;
+      transition: 0.25s;
+    }
+
+  }
+}
+
+// PC only
+@media screen and (min-width: $PC-threshold) {
+  .wrapper {
+    width: 732px;
+    margin: auto;
+  }
+}
+// mobile only
+@media screen and (max-width: $PC-threshold) {
+  .wrapper {
+    width: 100%;
+    margin: auto;
+  }
+}
+
+.pages:nth-child(n+2):before {
+  content:'';
+  display: block;
+  border-top: 1px solid #ccc;
+  margin: 2rem 0;
+  height: 2rem;
+}
+
+.pages {
+  //height: 720px;
+  text-align: center;
+
+  br {
+    content: "";
+    display: block;
+    height: 2rem;
+  }
+
+  .subtitles {
+    margin: 1rem 0 0 0;
+  }
+
+  .description {
+    margin: 0 0 1rem 0;
+  }
+
+  .moon-bg {
+    width: 600px;
+    max-width: 100%;
+    height: 500px;
+    @include div-with-bgImage('../images/moon.jpeg')
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+  }
+
+  .data-trend {
+    width: 305px;
+    max-width: 100%;
+    height: 64px;
+    @include div-with-bgImage('../images/data-trend-before.png');
+    margin: auto;
+  }
+
+  .text-under-image {
+    margin: 1rem;
+    font-size: 0.8rem;
+    color: #aaa;
+  }
+
+  .data-global {
+
+  }
+
+}
+
+.ring-1 {
+  position: relative;
+  top: 14px;
+  left: -12px;
+  width: $inner-ring-size;
+  height: $inner-ring-size;
+  margin: 0 auto;
+  padding: $inner-ring-size;
+  border: $inner-ring-size/8 $inner-ring-color;
+  border-style: dashed;
+  border-radius: 100%;
+
+  animation: loadingD 3.5s .7s cubic-bezier(.17, .37, .50, .75) infinite;
+
+  @keyframes loadingD {
+  0 {
+  transform: rotate(0deg);
+}
+  50% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+}
+

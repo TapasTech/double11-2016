@@ -1,0 +1,176 @@
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: black;
+  color: white;
+}
+
+img, .images {
+  margin: auto;
+  max-width: 100%;
+}
+
+#logo {
+  width: 39px;
+  height: 13px;
+  background-image: url("../images/Logo.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  left: 1rem;
+  top: 1rem;
+  position: fixed;
+}
+
+.fixed-layer {
+  position: fixed;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  height: 100%;
+}
+
+.fixed-layer nav {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: flex-start;
+  position: absolute;
+  width: 200px;
+  background: linear-gradient(to right, black, transparent);
+}
+
+.fixed-layer .anchors {
+  margin: 0.3rem 1rem;
+  text-decoration: none;
+  color: #aaaaaa;
+}
+
+.fixed-layer .anchors.active {
+  color: #ffffff;
+}
+
+.fixed-layer .anchors.active:after {
+  content: '';
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin: 0 0 0 5px;
+  border-top: 5px solid transparent;
+  border-right: 8px solid #fff;
+  border-bottom: 5px solid transparent;
+}
+
+.fixed-layer .anchors.active:hover {
+  color: white;
+}
+
+.fixed-layer .anchors:hover {
+  cursor: pointer;
+  color: #00f;
+  transition: 0.25s;
+}
+
+@media screen and (min-width: 732px) {
+  .wrapper {
+    width: 732px;
+    margin: auto;
+  }
+}
+
+@media screen and (max-width: 732px) {
+  .wrapper {
+    width: 100%;
+    margin: auto;
+  }
+}
+
+.pages:nth-child(n+2):before {
+  content: '';
+  display: block;
+  border-top: 1px solid #ccc;
+  margin: 2rem 0;
+  height: 2rem;
+}
+
+.pages {
+  text-align: center;
+}
+
+.pages br {
+  content: "";
+  display: block;
+  height: 2rem;
+}
+
+.pages .subtitles {
+  margin: 1rem 0 0 0;
+}
+
+.pages .description {
+  margin: 0 0 1rem 0;
+}
+
+.pages .moon-bg {
+  width: 600px;
+  max-width: 100%;
+  height: 500px;
+  background-image: url("../images/moon.jpeg");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+}
+
+.pages .data-trend {
+  width: 305px;
+  max-width: 100%;
+  height: 64px;
+  background-image: url("../images/data-trend-before.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  margin: auto;
+}
+
+.pages .text-under-image {
+  margin: 1rem;
+  font-size: 0.8rem;
+  color: #aaa;
+}
+
+.ring-1 {
+  position: relative;
+  top: 14px;
+  left: -12px;
+  width: 90px;
+  height: 90px;
+  margin: 0 auto;
+  padding: 90px;
+  border: 11.25px #cbac5b;
+  border-style: dashed;
+  border-radius: 100%;
+  animation: loadingD 3.5s 0.7s cubic-bezier(0.17, 0.37, 0.5, 0.75) infinite;
+}
+
+@keyframes loadingD {
+  0 {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
