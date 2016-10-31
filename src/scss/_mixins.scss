@@ -1,3 +1,5 @@
+@import "variables";
+
 @mixin div-with-bgImage($url) {
   background-image: url($url);
   background-size: 100% 100%;
