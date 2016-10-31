@@ -22,7 +22,7 @@ var del = require('del');
 var runSequence = require('run-sequence');
 
 gulp.task('sass', function () {
-    return gulp.src(['src/scss/*.scss', '!**/variables.scss'])
+    return gulp.src(['src/scss/*.scss'])
         .pipe(sass({outputStyle: 'expanded'}))  // nested, expanded, compact, compressed
         .on('error', sass.logError)
         .pipe(gulp.dest('src/css'))

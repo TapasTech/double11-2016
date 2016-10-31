@@ -1,6 +1,7 @@
 
 // device geometry related
-$PC-threshold: 732px;
+$PC-threshold: 720px;
+$PC-wrapper-width: 732px;
 
 // background
 $bg-color: rgba(0,0,0,1);
@@ -15,3 +16,13 @@ $nav-list-color: #aaaaaa;
 $nav-active-color: #ffffff;
 $nav-hover-color: #00f;
 $list-arrow-size: 5px;
+
+// card links
+$corner-text-color: orange;
+
+
+
+// load-more button
+$btn-height: 28px;
+$btn-width: 96px;
+$btn-color: orange;

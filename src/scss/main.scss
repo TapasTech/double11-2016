@@ -1,16 +1,9 @@
-@import "variables.scss";
+@import "_variables";
+@import "_mixins";
+@import "_cards";
+@import "_btn-load-more";
+@import "animation";
 
-@mixin div-with-bgImage($url) {
-  background-image: url($url);
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  background-position: center center;
-}
-@mixin vendor-prefix($name, $value) {
-  @each $vendor in ('-webkit-', '-moz-', '-ms-', '-o-', '') {
-    #{$vendor}#{$name}: #{$value};
-  }
-}
 
 * {
   @include vendor-prefix('box-sizing', 'border-box');
@@ -21,6 +14,10 @@ body {
   padding: 0;
   background: $bg-color;
   color: $font-color;
+}
+
+a {
+  text-decoration: none;
 }
 
 img, .images {
@@ -86,7 +83,7 @@ img, .images {
 // PC only
 @media screen and (min-width: $PC-threshold) {
   .wrapper {
-    width: 732px;
+    width: $PC-wrapper-width;
     margin: auto;
   }
 }
@@ -95,6 +92,12 @@ img, .images {
   .wrapper {
     width: 100%;
     margin: auto;
+  }
+  .cards-wrapper {
+    justify-content: center;
+  }
+  #navBar {
+    display: none;
   }
 }
 
@@ -106,15 +109,13 @@ img, .images {
   height: 2rem;
 }
 
+#page1 {
+  min-height: 100vh;
+}
+
 .pages {
   //height: 720px;
   text-align: center;
-
-  br {
-    content: "";
-    display: block;
-    height: 2rem;
-  }
 
   .subtitles {
     margin: 1rem 0 0 0;
@@ -128,7 +129,7 @@ img, .images {
     width: 600px;
     max-width: 100%;
     height: 500px;
-    @include div-with-bgImage('../images/moon.jpeg')
+    @include div-with-bgImage('../images/moon.jpeg');
     display: flex;
     flex-flow: column;
     justify-content: center;
@@ -142,42 +143,31 @@ img, .images {
     margin: auto;
   }
 
+  .video {
+    width: $PC-wrapper-width;
+    max-width: 100%;
+    height: 371px;
+    @include div-with-bgImage('../images/video.png');
+  }
+
   .text-under-image {
     margin: 1rem;
     font-size: 0.8rem;
     color: #aaa;
   }
 
+  .video-text {
+    text-align: left;
+    font-size: 1.2rem;
+  }
+
   .data-global {
 
   }
 
+
+
 }
 
-.ring-1 {
-  position: relative;
-  top: 14px;
-  left: -12px;
-  width: $inner-ring-size;
-  height: $inner-ring-size;
-  margin: 0 auto;
-  padding: $inner-ring-size;
-  border: $inner-ring-size/8 $inner-ring-color;
-  border-style: dashed;
-  border-radius: 100%;
 
-  animation: loadingD 3.5s .7s cubic-bezier(.17, .37, .50, .75) infinite;
-
-  @keyframes loadingD {
-  0 {
-  transform: rotate(0deg);
-}
-  50% {
-    transform: rotate(180deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-}
 
