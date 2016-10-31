@@ -1,16 +1,9 @@
-@import "variables.scss";
+@import "_variables";
+@import "_mixins";
+@import "_cards";
+@import "_btn-load-more";
+@import "animation";
 
-@mixin div-with-bgImage($url) {
-  background-image: url($url);
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  background-position: center center;
-}
-@mixin vendor-prefix($name, $value) {
-  @each $vendor in ('-webkit-', '-moz-', '-ms-', '-o-', '') {
-    #{$vendor}#{$name}: #{$value};
-  }
-}
 
 * {
   @include vendor-prefix('box-sizing', 'border-box');
@@ -21,6 +14,11 @@ body {
   padding: 0;
   background: $bg-color;
   color: $font-color;
+  font-family: "PingFang SC";
+}
+
+a {
+  text-decoration: none;
 }
 
 img, .images {
@@ -37,12 +35,43 @@ img, .images {
   position: fixed;
 }
 
+.background {
+  position: fixed;
+  margin: auto;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  @include my-flex($justify: center, $align:center);
+  z-index: -100;
+
+  .full-moon {
+    position: absolute;
+    background: url(../images/full-moon.png) center center no-repeat;
+    background-size: 100%;
+    width: 595px;
+    height: 573px;
+    margin: auto;
+    z-index: -100;
+  }
+}
+
 .fixed-layer {
   position: fixed;
-  display: flex;
-  flex-flow: column;
-  justify-content: center;
-  height: 100%;
+  top: 0;
+  height: 100vh;
+  //width: 100%;
+  @include my-flex($flow: column, $justify: center);
+
+
+
+  .nav-wrapper {
+    display: flex;
+    height: 100vh;
+    flex-flow: column;
+    justify-content: center;
+    width: 200px;
+  }
 
   nav {
     display: flex;
@@ -79,24 +108,33 @@ img, .images {
       color: $nav-hover-color;
       transition: 0.25s;
     }
-
   }
 }
 
 // PC only
 @media screen and (min-width: $PC-threshold) {
   .wrapper {
-    width: 732px;
+    width: $PC-wrapper-width;
     margin: auto;
   }
 }
+
 // mobile only
-@media screen and (max-width: $PC-threshold) {
+@media #{$mobile} {
   .wrapper {
     width: 100%;
     margin: auto;
   }
+  .cards-wrapper {
+    justify-content: center;
+  }
+  #navBar {
+    display: none;
+  }
+
 }
+
+
 
 .pages:nth-child(n+2):before {
   content:'';
@@ -106,15 +144,12 @@ img, .images {
   height: 2rem;
 }
 
-.pages {
-  //height: 720px;
-  text-align: center;
+#page1 {
+  min-height: 100vh;
+}
 
-  br {
-    content: "";
-    display: block;
-    height: 2rem;
-  }
+.pages {
+  text-align: center;
 
   .subtitles {
     margin: 1rem 0 0 0;
@@ -124,15 +159,80 @@ img, .images {
     margin: 0 0 1rem 0;
   }
 
-  .moon-bg {
-    width: 600px;
+  .theme-image {
+    $size-factor: 0.6;
+    width: 226px *$size-factor;
     max-width: 100%;
-    height: 500px;
-    @include div-with-bgImage('../images/moon.jpeg')
-    display: flex;
-    flex-flow: column;
-    justify-content: center;
+    height: 179px *$size-factor;
+    @include div-with-bgImage('../images/theme-image.png');
   }
+
+  .clock-wrapper {
+    height: 70vh;
+    .clock-group {
+      @include my-flex($flow: column nowrap, $justify: center);
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      z-index: -50;
+      .clock-elements {
+        $size-factor: 1;
+        $clock-width: 354px * $size-factor;
+        $clock-height: 358px * $size-factor;
+        width: $clock-width;
+        height: $clock-height;
+        max-width: 100%;
+        position: relative;
+        left: 8px;
+
+        .clock-partials {
+          position: absolute;
+          @include my-flex($justify: center, $align:center);
+          width: $clock-width;
+          height: $clock-height;
+        }
+        .clock-bg {
+          width: $clock-width;
+          height: $clock-height;
+          @include div-with-bgImage('../images/clock-bg.png');
+        }
+        .outer-ring {
+          $outer-ring-size-factor: 0.92;
+          width: $clock-width * $outer-ring-size-factor;
+          height: $clock-height * $outer-ring-size-factor;
+          @include div-with-bgImage('../images/outer-ring.png');
+        }
+        .inner-ring {
+          $inner-ring-size-factor: 0.85;
+          width: $clock-width * $inner-ring-size-factor;
+          height: $clock-height * $inner-ring-size-factor;
+          @include div-with-bgImage('../images/inner-ring.png');
+        }
+
+        .unit-text {
+          position: relative;
+          top: 100px;
+        }
+
+      }
+
+    }
+  }
+
+  #GMV-time {
+    position: relative;
+    top: -84px;
+    font-size: 24px;
+  }
+
+  #GMV-number {
+    font-size: 120px;
+    font-weight: 600;
+    text-shadow: 0 0 14px;
+  }
+
 
   .data-trend {
     width: 305px;
@@ -142,42 +242,52 @@ img, .images {
     margin: auto;
   }
 
+  .video {
+    width: $PC-wrapper-width;
+    max-width: 731px;
+    height: 371px;
+    @include div-with-bgImage('../images/video.png');
+    @media #{$mobile} {
+      width: 100vw;
+      height: 371/731 * 100vw;
+    }
+
+  }
+
+  .big-data-inspection {
+    max-width: 362px;
+    height: 181px;
+    @include div-with-bgImage('../images/big-data-inspection.png');
+    @media #{$mobile} {
+      width: 100vw;
+      height: 50vw;
+    }
+  }
+
   .text-under-image {
     margin: 1rem;
     font-size: 0.8rem;
     color: #aaa;
   }
 
+  .video-text {
+    text-align: left;
+    font-size: 1.2rem;
+  }
+
   .data-global {
 
   }
 
-}
 
-.ring-1 {
-  position: relative;
-  top: 14px;
-  left: -12px;
-  width: $inner-ring-size;
-  height: $inner-ring-size;
-  margin: 0 auto;
-  padding: $inner-ring-size;
-  border: $inner-ring-size/8 $inner-ring-color;
-  border-style: dashed;
-  border-radius: 100%;
-
-  animation: loadingD 3.5s .7s cubic-bezier(.17, .37, .50, .75) infinite;
-
-  @keyframes loadingD {
-  0 {
-  transform: rotate(0deg);
-}
-  50% {
-    transform: rotate(180deg);
+  .default-bottom-text {
+    margin: 1rem 0 4rem 0;
+    color: $theme-orange;
   }
-  100% {
-    transform: rotate(360deg);
-  }
-}
+
 }
 
+
+.hidden {
+  display: none !important;
+}

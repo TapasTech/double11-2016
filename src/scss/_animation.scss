@@ -1,0 +1,33 @@
+@import "variables";
+
+.outer-ring {
+  animation: outerRing 3.5s .7s cubic-bezier(.17, .37, .50, .75) infinite;
+
+  @keyframes outerRing {
+  0 {
+  transform: rotate(0deg);
+}
+  50% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+}
+
+.inner-ring {
+  animation: innerRing 3.5s .7s cubic-bezier(.17, .37, .50, .75) infinite;
+
+  @keyframes innerRing {
+  0 {
+  transform: rotate(0deg);
+}
+  50% {
+    transform: rotate(-180deg);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+}

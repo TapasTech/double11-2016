@@ -22,7 +22,7 @@ var del = require('del');
 var runSequence = require('run-sequence');
 
 gulp.task('sass', function () {
-    return gulp.src(['src/scss/*.scss', '!**/variables.scss'])
+    return gulp.src(['src/scss/*.scss'])
         .pipe(sass({outputStyle: 'expanded'}))  // nested, expanded, compact, compressed
         .on('error', sass.logError)
         .pipe(gulp.dest('src/css'))
@@ -65,15 +65,17 @@ gulp.task('watch', ['browserSync', 'sass', 'jshint'], function() {
     gulp.watch('src/scss/*.scss', ['sass']);
 });
 
-// run build sequence
-gulp.task('build', function (callback) {
+// run dev build sequence
+gulp.task('dev', function (callback) {
     runSequence(
         // ['watch', 'sass', 'uglify', 'images', 'browserSync'],
         ['watch', 'sass', 'uglify', 'browserSync'],
         callback
     )
 });
-
+gulp.task('default', function() {
+    runSequence('dev');
+});
 
 // uglify JS and pipe to dist
 gulp.task('uglify', function() {
@@ -110,9 +112,9 @@ gulp.task('sass-prod', function () {
 // minify images
 gulp.task('images-prod', function () {
     return streamqueue({objectMode: true},
-        gulp.src(['app/images/**/*.+(png|jpg|jpeg|gif|svg)'])
+        gulp.src(['src/images/**/*.+(png|jpg|jpeg|gif|svg)'])
         // Caching images that ran through imagemin
-            .pipe(cache(imagemin({interlaced: true})))
+        //     .pipe(cache(imagemin({interlaced: true})))
             .pipe(rev())
             .pipe(gulp.dest('dist/images'))
             .pipe(rev.manifest())
@@ -123,10 +125,7 @@ gulp.task('images-prod', function () {
 // copy html and common resources to dist
 gulp.task('copy', function () {
     return streamqueue({objectMode: true},
-        gulp.src('src/**/*.html')
-            .pipe(browserSync.reload({
-                stream: true
-            }))
+        gulp.src(['src/**/*.html','src/**/*.txt','src/**/*.json'])
             .pipe(gulp.dest('dist/')),
         gulp.src('src/common/!**/')
             .pipe(gulp.dest('dist/common/'))
@@ -143,7 +142,7 @@ gulp.task('rev', function () {
         // 更新css中引用的图片的路径
         gulp.src(['dist/rev/images/*.json', 'dist/css/*.css'])
             .pipe(revCollector({replaceReved: true}))
-            .pipe(gulp.dest('dist/scss/'))
+            .pipe(gulp.dest('dist/css/'))
     )
 });
 
@@ -161,7 +160,7 @@ gulp.task('browserSync-prod', function() {
 });
 
 // Watch Files For Changes
-gulp.task('watch-prod', ['browserSync-prod', 'sass-prod','images-prod', 'uglify', 'rev'], function() {
+gulp.task('watch-prod', ['browserSync-prod'], function() {
     gulp.watch(['src/js/*.js']).on('change', browserSync.reload);
     gulp.watch(["src/**/*.html"]).on('change', browserSync.reload);
     gulp.watch('src/scss/*.scss', ['sass']);
@@ -170,7 +169,7 @@ gulp.task('watch-prod', ['browserSync-prod', 'sass-prod','images-prod', 'uglify'
 
 gulp.task('prod', function (callback) {
     runSequence(
-        ['clean', 'uglify', 'sass-prod','images-prod', 'copy','watch-prod'],
+        ['clean', 'uglify', 'sass-prod','images-prod', 'copy'],'rev',
         callback
     )
 });
