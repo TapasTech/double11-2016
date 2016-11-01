@@ -194,7 +194,7 @@ img, .images {
 
   }
 
-  .big-data-inspection {
+  /*.big-data-inspection {
     max-width: 362px;
     height: 181px;
     @include div-with-bgImage('../images/big-data-inspection.png');
@@ -202,6 +202,10 @@ img, .images {
       width: 100vw;
       height: 50vw;
     }
+  }*/
+
+  .img-last-page {
+    max-width: 60%;
   }
 
   .text-under-image {

@@ -1,9 +1,5 @@
 .clock-wrapper {
   height: 70vh;
-  /*@media (max-width:720px) {
-    position: relative;
-    top: -10px;
-  }*/
 }
 
 .clock-wrapper .clock-group {
@@ -16,7 +12,6 @@
   left: 0;
   height: 100%;
   width: 100%;
-  z-index: -50;
 }
 
 .clock-wrapper .clock-group .clock-elements {
@@ -112,6 +107,31 @@
     margin-left: 5em;
     font-size: 80%;
   }
+}
+
+.clock-wrapper .clock-group .clock-elements .shiny-point {
+  width: 16px;
+  height: 16px;
+  background-color: #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 6px;
+  z-index: 100;
+}
+
+.clock-wrapper .clock-group .clock-elements .shiny-point:hover {
+  cursor: pointer;
+}
+
+.clock-wrapper .clock-group .clock-elements .shiny-point.active {
+  background-color: #FF5733;
+}
+
+.clock-wrapper .clock-group .clock-elements #graduation1 {
+  transform: translate(96px, 96px);
+}
+
+.clock-wrapper .clock-group .clock-elements #graduation2 {
+  transform: translate(-96px, -96px);
 }
 
 .clock-wrapper #GMV-time {
@@ -236,6 +256,7 @@
   flex-flow: column;
   justify-content: center;
   align-items: flex-start;
+  z-index: 100;
 }
 
 @media (min-width: 720px) {
@@ -255,7 +276,7 @@
     height: 100vh;
     flex-flow: column;
     justify-content: center;
-    width: 200px;
+    width: 240px;
   }
   .fixed-layer nav {
     display: flex;
@@ -265,11 +286,16 @@
     position: absolute;
     width: 200px;
     background: linear-gradient(to right, black, transparent);
+    z-index: 100;
   }
   .fixed-layer .anchors {
-    margin: 0.3rem 1rem;
+    margin: 0.3rem 0 0.3rem 1rem;
     text-decoration: none;
     color: #aaaaaa;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: center;
   }
   .fixed-layer .anchors.active {
     color: #ffffff;
@@ -549,6 +575,15 @@ img, .images {
 
 .pages {
   text-align: center;
+  /*.big-data-inspection {
+    max-width: 362px;
+    height: 181px;
+    @include div-with-bgImage('../images/big-data-inspection.png');
+    @media (max-width:720px) {
+      width: 100vw;
+      height: 50vw;
+    }
+  }*/
 }
 
 .pages .content-wrapper {
@@ -633,20 +668,8 @@ img, .images {
   }
 }
 
-.pages .big-data-inspection {
-  max-width: 362px;
-  height: 181px;
-  background-image: url("../images/big-data-inspection.png");
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  background-position: center center;
-}
-
-@media (max-width: 720px) {
-  .pages .big-data-inspection {
-    width: 100vw;
-    height: 50vw;
-  }
+.pages .img-last-page {
+  max-width: 60%;
 }
 
 .pages .text-under-image {

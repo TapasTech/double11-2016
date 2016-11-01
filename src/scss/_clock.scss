@@ -3,10 +3,6 @@
 
 .clock-wrapper {
   height: 70vh;
-  /*@media #{$mobile} {
-    position: relative;
-    top: -10px;
-  }*/
 
   .clock-group {
     @include my-flex($flow: column nowrap, $justify: center);
@@ -15,7 +11,6 @@
     left: 0;
     height: 100%;
     width: 100%;
-    z-index: -50;
 
     .clock-elements {
       $size-factor: 1;
@@ -89,6 +84,32 @@
           margin: 0.5rem 0 0 -1.2rem;
         }
 
+      }
+      $clock-radius: 96px;
+      $graduation-diameter: 16px;
+      .shiny-point {
+        width: $graduation-diameter;
+        height: $graduation-diameter;
+        background-color: #fff;
+        border-radius: 50%;
+        box-shadow: 0 0 6px;
+        z-index:100;
+
+
+        &:hover {
+          cursor: pointer;
+        }
+
+        &.active {
+          background-color: $theme-orange;
+        }
+      }
+
+      #graduation1 {
+        transform: translate($clock-radius, $clock-radius);
+      }
+      #graduation2 {
+        transform: translate(-$clock-radius, -$clock-radius);
       }
 
     }
