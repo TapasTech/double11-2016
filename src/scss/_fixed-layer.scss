@@ -7,57 +7,64 @@
   height: 100vh;
   @include my-flex($flow: column, $justify: center);
 
-  #logo {
-    width: 39px;
-    height: 13px;
-    @include div-with-bgImage('../images/Logo.png');
-    left: 1rem;
-    top: 1rem;
-    position: fixed;
-  }
+  @media #{$PC} {
+    #logo {
+      width: 39px;
+      height: 13px;
+      @include div-with-bgImage('../images/Logo.png');
+      left: 1rem;
+      top: 1rem;
+      position: fixed;
+    }
 
-  .nav-wrapper {
-    display: flex;
-    height: 100vh;
-    flex-flow: column;
-    justify-content: center;
-    width: 200px;
-  }
+    .nav-wrapper {
+      display: flex;
+      height: 100vh;
+      flex-flow: column;
+      justify-content: center;
+      width: 200px;
+    }
 
-  nav {
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: center;
-    align-items: flex-start;
-    position: absolute;
-    width: 200px;
-    background: linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0))
-  }
+    nav {
+      display: flex;
+      flex-flow: column nowrap;
+      justify-content: center;
+      align-items: flex-start;
+      position: absolute;
+      width: 200px;
+      background: linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0))
+    }
 
-  .anchors {
-    margin: 0.3rem 1rem;
-    text-decoration: none;
-    color: $nav-list-color;
-    &.active {
-      color: $nav-active-color;
-      &:after {
-        content: '';
-        display: inline-block;
-        width: 0;
-        height: 0;
-        margin: 0 0 0 $list-arrow-size;
-        border-top: $list-arrow-size solid transparent;
-        border-right: $list-arrow-size*1.6 solid #fff;
-        border-bottom: $list-arrow-size solid transparent;
+    .anchors {
+      margin: 0.3rem 1rem;
+      text-decoration: none;
+      color: $nav-list-color;
+      &.active {
+        color: $nav-active-color;
+        &:after {
+          content: '';
+          display: inline-block;
+          width: 0;
+          height: 0;
+          margin: 0 0 0 $list-arrow-size;
+          border-top: $list-arrow-size solid transparent;
+          border-right: $list-arrow-size*1.6 solid #fff;
+          border-bottom: $list-arrow-size solid transparent;
+        }
+        &:hover {
+          color: $font-color;
+        }
       }
       &:hover {
-        color: $font-color;
+        cursor: pointer;
+        color: $nav-hover-color;
+        transition: 0.25s;
       }
     }
-    &:hover {
-      cursor: pointer;
-      color: $nav-hover-color;
-      transition: 0.25s;
-    }
   }
+
+  @media #{$mobile} {
+
+  }
+
 }

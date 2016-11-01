@@ -1,5 +1,9 @@
 .clock-wrapper {
   height: 70vh;
+  /*@media (max-width:720px) {
+    position: relative;
+    top: -10px;
+  }*/
 }
 
 .clock-wrapper .clock-group {
@@ -19,8 +23,27 @@
   width: 354px;
   height: 358px;
   max-width: 100%;
+  margin: auto;
   position: relative;
-  left: 8px;
+}
+
+@media (min-width: 720px) {
+  .clock-wrapper .clock-group .clock-elements {
+    left: 8px;
+  }
+}
+
+@media (max-width: 320px) {
+  .clock-wrapper .clock-group .clock-elements {
+    top: 18px;
+  }
+}
+
+.clock-wrapper .clock-group .clock-elements .GMV-title {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 1.5rem;
 }
 
 .clock-wrapper .clock-group .clock-elements .clock-partials {
@@ -31,11 +54,15 @@
   align-items: center;
   width: 354px;
   height: 358px;
+  max-width: 100vw;
+  max-height: 101.12994vw;
 }
 
 .clock-wrapper .clock-group .clock-elements .clock-bg {
   width: 354px;
   height: 358px;
+  max-width: 100vw;
+  max-height: 101.12994vw;
   background-image: url("../images/clock-bg.png");
   background-size: 100% 100%;
   background-repeat: no-repeat;
@@ -80,6 +107,13 @@
   margin: 0.5rem 0 0 -1.2rem;
 }
 
+@media (max-width: 720px) {
+  .clock-wrapper .clock-group .clock-elements .GMV-indicator .clock-description {
+    margin-left: 5em;
+    font-size: 80%;
+  }
+}
+
 .clock-wrapper #GMV-time {
   position: relative;
   top: -84px;
@@ -93,9 +127,10 @@
 }
 
 .gauge-wrapper {
-  /*position: absolute;
-  left: calc(50% + 120px);
-  top: 4rem;*/
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: flex-start;
 }
 
 @media (max-width: 720px) {
@@ -116,6 +151,7 @@
 .gauge-wrapper .gauge-elements {
   width: 226px;
   height: 226px;
+  position: relative;
 }
 
 .gauge-wrapper .gauge-partials {
@@ -159,22 +195,35 @@
 .gauge-wrapper .mobile-indicator {
   position: relative;
   top: 226px;
-  left: 108px;
+  left: 100px;
+}
+
+@media (max-width: 720px) {
+  .gauge-wrapper .mobile-indicator {
+    left: 90px;
+  }
 }
 
 .gauge-wrapper .gauges-description {
-  padding-left: 4rem;
+  margin-left: 4em;
   text-align: left;
   white-space: nowrap;
 }
 
+@media (max-width: 720px) {
+  .gauge-wrapper .gauges-description {
+    font-size: 80%;
+    margin-left: 0;
+  }
+}
+
 .description-title {
-  font-size: 20px;
+  font-size: 1.25em;
   line-height: 30px;
 }
 
 .description-text {
-  font-size: 30px;
+  font-size: 1.875em;
   line-height: 30px;
   text-shadow: 0px 2px 9px rgba(255, 255, 255, 0.6);
 }
@@ -189,65 +238,60 @@
   align-items: flex-start;
 }
 
-.fixed-layer #logo {
-  width: 39px;
-  height: 13px;
-  background-image: url("../images/Logo.png");
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  background-position: center center;
-  left: 1rem;
-  top: 1rem;
-  position: fixed;
-}
-
-.fixed-layer .nav-wrapper {
-  display: flex;
-  height: 100vh;
-  flex-flow: column;
-  justify-content: center;
-  width: 200px;
-}
-
-.fixed-layer nav {
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
-  align-items: flex-start;
-  position: absolute;
-  width: 200px;
-  background: linear-gradient(to right, black, transparent);
-}
-
-.fixed-layer .anchors {
-  margin: 0.3rem 1rem;
-  text-decoration: none;
-  color: #aaaaaa;
-}
-
-.fixed-layer .anchors.active {
-  color: #ffffff;
-}
-
-.fixed-layer .anchors.active:after {
-  content: '';
-  display: inline-block;
-  width: 0;
-  height: 0;
-  margin: 0 0 0 5px;
-  border-top: 5px solid transparent;
-  border-right: 8px solid #fff;
-  border-bottom: 5px solid transparent;
-}
-
-.fixed-layer .anchors.active:hover {
-  color: white;
-}
-
-.fixed-layer .anchors:hover {
-  cursor: pointer;
-  color: #ffffff;
-  transition: 0.25s;
+@media (min-width: 720px) {
+  .fixed-layer #logo {
+    width: 39px;
+    height: 13px;
+    background-image: url("../images/Logo.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    left: 1rem;
+    top: 1rem;
+    position: fixed;
+  }
+  .fixed-layer .nav-wrapper {
+    display: flex;
+    height: 100vh;
+    flex-flow: column;
+    justify-content: center;
+    width: 200px;
+  }
+  .fixed-layer nav {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: flex-start;
+    position: absolute;
+    width: 200px;
+    background: linear-gradient(to right, black, transparent);
+  }
+  .fixed-layer .anchors {
+    margin: 0.3rem 1rem;
+    text-decoration: none;
+    color: #aaaaaa;
+  }
+  .fixed-layer .anchors.active {
+    color: #ffffff;
+  }
+  .fixed-layer .anchors.active:after {
+    content: '';
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin: 0 0 0 5px;
+    border-top: 5px solid transparent;
+    border-right: 8px solid #fff;
+    border-bottom: 5px solid transparent;
+  }
+  .fixed-layer .anchors.active:hover {
+    color: white;
+  }
+  .fixed-layer .anchors:hover {
+    cursor: pointer;
+    color: #ffffff;
+    transition: 0.25s;
+  }
 }
 
 .cards-wrapper {
@@ -390,6 +434,7 @@ body {
   background: black;
   color: white;
   font-family: "PingFang SC";
+  overflow-x: hidden;
 }
 
 a {
@@ -430,6 +475,9 @@ img, .images {
     width: 732px;
     margin: auto;
   }
+  .nav-mobile {
+    display: none;
+  }
 }
 
 @media (max-width: 720px) {
@@ -443,6 +491,47 @@ img, .images {
   #navBar {
     display: none;
   }
+  .nav-mobile {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+  }
+  .nav-mobile .nav-mobile-header {
+    padding: 3vw 2vw 2vw 2vw;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .nav-mobile .nav-mobile-header .menu-icon {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    padding: 4px;
+  }
+  .nav-mobile .drop-down-list {
+    border-top: 1px solid #404040;
+    background: #000;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    height: 100vh;
+    padding-left: 2rem;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+  .nav-mobile .drop-down-list a {
+    color: white;
+  }
+  .nav-mobile .drop-down-list .list-items {
+    border-bottom: 1px solid #404040;
+    padding: 1rem;
+    width: 100%;
+  }
 }
 
 .pages:nth-child(n+2):before {
@@ -455,6 +544,7 @@ img, .images {
 
 #page1 {
   min-height: 100vh;
+  padding-top: 1rem;
 }
 
 .pages {
@@ -462,7 +552,17 @@ img, .images {
 }
 
 .pages .content-wrapper {
-  margin-top: 40px;
+  margin: 80px 0 60px 0;
+}
+
+@media (max-width: 720px) {
+  .pages .content-wrapper {
+    margin-top: 120px;
+  }
+}
+
+.pages .content-wrapper .remote-image-wrapper {
+  margin: 3rem 0 1rem 0;
 }
 
 .pages .subtitles {
@@ -473,25 +573,47 @@ img, .images {
   margin: 0 0 1rem 0;
 }
 
-.pages .theme-image {
+.pages #themeImage {
   width: 135.6px;
+  max-width: 35%;
+}
+
+.pages .data-trend-default {
+  width: 305px;
   max-width: 100%;
-  height: 107.4px;
-  background-image: url("../images/theme-image.png");
+  height: 64px;
+  background-image: url("../images/data-trend-default.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  margin: auto;
+}
+
+.pages .data-trend {
+  width: 744px;
+  height: 82px;
+  background-image: url("../images/data-trend.png");
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: center center;
 }
 
-.pages .data-trend {
-  width: 305px;
-  max-width: 100%;
-  height: 64px;
-  background-image: url("../images/data-trend-before.png");
+.pages .global-data {
+  width: 807px;
+  height: 441px;
+  background-image: url("../images/global-trend.png");
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: center center;
-  margin: auto;
+}
+
+.pages .national-data {
+  width: 807px;
+  height: 441px;
+  background-image: url("../images/global-trend.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
 }
 
 .pages .video {
@@ -551,4 +673,8 @@ img, .images {
 
 .hidden {
   display: none !important;
+}
+
+.black-bg {
+  background: #000;
 }

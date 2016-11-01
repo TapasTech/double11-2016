@@ -10,29 +10,48 @@ $(function () {
     $.ajax({
         url: './data.txt',
         success: function (data) {
-
             var dataFiltered = data.split('\n').filter(isValid);
-
             function isValid(str) {
                 if (str.length > 2) {
                     return str;
                 }
             }
-
             var indexTotal = dataFiltered.indexOf('total_amount');
             var indexMobile = dataFiltered.indexOf('mobile_ratio');
-
             var arrTotal = dataFiltered.slice(indexTotal + 1, indexMobile);
             var arrMobile = dataFiltered.slice(indexMobile + 1, dataFiltered.length + 1);
 
             if (!arrTotal) {
                 return;
             }
-
             console.log(arrMobile);
-
         }
     });
+
+    // load data-trend, national and global data images
+    // trend data image
+    $('<img/>').attr('src', 'images/data-trend.png').load(function() {
+        $(this).remove(); // prevent memory leaks
+        $('#divDataTrend').append('<div class="image-title"><h4 class="subtitles">2016天猫11.11购物狂欢节</h4>' +
+            '<h3 class="description">总成交额趋势</h3></div><img src="images/data-trend.png"/>');
+    }).error(function() {
+        $('#divDataTrend').append('<div id="data-trend-default"><div class="images data-trend-default"></div><div class="text-under-image">更多数据敬请期待...</div></div>');
+    });
+
+    // global data image
+    $('<img/>').attr('src', 'images/global-data-test.png').load(function() {
+        $(this).remove(); // prevent memory leaks
+        $('#divGlobalData').append('<div class="image-title"><h4 class="subtitles">2016天猫11.11购物狂欢节</h4><h3 class="description">' +
+            '全球交易国家/地区排行</h3></div><div class="images"><img src="images/global-data-test.png"></div>');
+    });
+
+    // national data image
+    $('<img/>').attr('src', 'images/national-data-test.png').load(function() {
+        $(this).remove(); // prevent memory leaks
+        $('#divNationalData').append('<div class="image-title"><h4 class="subtitles">2016天猫11.11购物狂欢节</h4><h3 class="description">' +
+            '全天交易额省份TOP10</h3></div><div class="images"><img src="images/national-data-test.png"/></div>');
+    });
+
 
     var $anchors = $('.anchors');
     $anchors.on('click', function (e) {
@@ -40,6 +59,14 @@ $(function () {
         $anchors.removeClass('active');
         $(this).addClass('active');
         $('html,body').animate({scrollTop: $($(this).attr('href')).offset().top}, 500)
+    });
+
+    $('#navMobileMenu').on('click', function() {
+        $('.nav-mobile-header').toggleClass('black-bg');
+        $('#toggleMenu').slideToggle('fast');
+    });
+    $('.list-items').on('click', function() {
+        $('#navMobileMenu').click();
     });
 
     // add title for all pages
@@ -100,7 +127,6 @@ $(function () {
     });
 
     function init() {
-
 
         // load GMV and mobile-ratio data
 

@@ -10,7 +10,7 @@
 
 
 <div class="fixed-layer">
-    <div id="logo"></div>
+    <a id="logo" href="http://www.dtcj.com" target="_blank"></a>
     <nav id="navBar">
         <a class="anchors active" href="#page1">双十一数据看板</a>
         <a class="anchors" href="#page2">2016年双11跟踪报道</a>
@@ -24,17 +24,30 @@
     <div class="images full-moon"></div>
 </div>
 
+<div class="nav-mobile">
+    <div class="nav-mobile-header">
+        <span class="menu-icon"><a href="http://www.dtcj.com"><img src="images/logo-mobile.png"></a></span>
+        <span class="menu-icon" id="navMobileMenu"><img src="images/menu-icon.svg"></span>
+    </div>
+    <div class="drop-down-list" id="toggleMenu" style="display:none">
+        <a class="list-items" href="#page1">双十一数据看板</a>
+        <a class="list-items" href="#page2">2016年双11跟踪报道</a>
+        <a class="list-items" href="#page3">DT消费新边界智库</a>
+        <a class="list-items" href="#page4">2016年双11大数据洞察</a>
+    </div>
+
+</div>
+
 <div class="wrapper">
-
     <div class="pages" id="page1">
-
         <h4 class='subtitles'></h4>
-
-        <div class="images theme-image"></div>
-
+        <div class="images">
+            <img id="themeImage" src="images/theme-image.png">
+        </div>
         <div class="clock-wrapper">
             <div class="clock-group">
                 <div class="images clock-elements">
+                    <span class="GMV-title">GMV</span>
                     <div class="clock-partials">
                         <div class="clock-bg"></div>
                     </div>
@@ -85,25 +98,18 @@
             </div>
         </div>
 
-
         <div class="content-wrapper">
-
-            <div class="images data-trend"></div>
-            <div class="text-under-image">更多数据敬请期待...</div>
-
-            <!--<h4 class='subtitles'></h4>
-            <h3 class="description">全球交易国家/地区排行</h3>
-            <div class="images global-map"></div>-->
-
+            <div id="divDataTrend" class="remote-image-wrapper"></div>
+            <div id="divGlobalData" class="remote-image-wrapper"></div>
+            <div id="divNationalData" class="remote-image-wrapper"></div>
         </div>
-
     </div>
 
     <div class="pages" id="page2">
         <h4 class='subtitles'></h4>
         <h3 class="description">跟踪报道</h3>
 
-        <div class="images video"></div>
+        <a style="display: block" href="http://www.baidu.com" target="_blank"><div class="images video"></div></a>
         <div class="video-text waiting">敬请期待...</div>
 
         <div class="cards-wrapper cards-collapsed"></div>
