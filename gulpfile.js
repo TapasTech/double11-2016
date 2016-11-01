@@ -125,10 +125,8 @@ gulp.task('images-prod', function () {
 // copy html and common resources to dist
 gulp.task('copy', function () {
     return streamqueue({objectMode: true},
-        gulp.src(['src/**/*.html','src/**/*.txt','src/**/*.json'])
-            .pipe(gulp.dest('dist/')),
-        gulp.src('src/common/!**/')
-            .pipe(gulp.dest('dist/common/'))
+        gulp.src(['src/**/*.html','src/**/*.txt','src/**/*.json', 'src/common/*'])
+            .pipe(gulp.dest('dist/'))
     )
 });
 

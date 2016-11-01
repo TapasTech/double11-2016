@@ -82,7 +82,8 @@ $(function () {
                         articleArr[i].title + '</div></div></a>'
                 }
                 // insert articles into pages
-                $('#page' + pageNumber + ' .cards-wrapper').append(cardsHtml);
+                var $cardsWrapper = $('#page' + pageNumber + ' .cards-wrapper');
+                $cardsWrapper.append(cardsHtml);
                 // hide load-more button if number of articles is not more than initially displayed articles
                 if (numArticles <= numInitial) {
                     $('#page' + pageNumber + ' .btn-load-more').addClass('hidden');
@@ -90,7 +91,7 @@ $(function () {
 
                 // display default image if no article published
                 if (numArticles == 0 && pageNumber == 4) {
-                    $('#page' + pageNumber + ' .cards-wrapper').after('' +
+                    $cardsWrapper.after('' +
                         '<div class="images big-data-inspection"></div>' +
                         '<div class="default-bottom-text">双十一年鉴<br>敬请期待</div>');
                 }
@@ -99,7 +100,30 @@ $(function () {
     });
 
     function init() {
+
+
+        // load GMV and mobile-ratio data
+
+        //
+        animateProgressBar(1);
+
         $('.btn-load-more').html('查看更多');
+    }
+
+    function animateProgressBar(ratio) {
+        // var fullPercentage = 0.74;
+        var fullPercentage = 0.74;
+        $('#progressBar').circleProgress({
+            value: ratio * fullPercentage,
+            size: 194,
+            startAngle: -Math.PI * 1.24,
+            fill: {
+                gradient: ["rgba(255,87,51,0.3)", "rgba(255,87,51,0.7)"]
+            },
+            emptyFill: "rgba(255,255,255,0)",
+            thickness: 24,
+            animation: { duration: 1200}
+        });
     }
 
     // load-more-button click event
@@ -124,11 +148,23 @@ $(function () {
                 scrollTriggered = false;
             }, 0.3 * 1000)
         }
-    })
+    });
 
-    var d = new Date(); // for now
-    var datetext = d.getHours()+":"+d.getMinutes()+":"+d.getSeconds();
-    $('#GMV-time').html(datetext);
+    // update GMV data
+    var $gmvTime = $('#GMV-time');
+    setInterval(function() {
+        $gmvTime.html(formateDate(new Date()));
+    }, 1000);
+
+    function formateDate(date) {
+        var hours = prependZero(date.getHours());
+        var minutes = prependZero(date.getMinutes());
+        var seconds = prependZero(date.getSeconds());
+        return hours + ":" + minutes + ":" + seconds;
+    }
+    function prependZero(value) {
+        return (value < 10) ? "0" + value : value;
+    }
 
 });
 

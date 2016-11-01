@@ -1,9 +1,10 @@
 @import "_variables";
+@import "_clock";
+@import "fixed-layer";
 @import "_mixins";
 @import "_cards";
 @import "_btn-load-more";
 @import "animation";
-
 
 * {
   @include vendor-prefix('box-sizing', 'border-box');
@@ -26,15 +27,6 @@ img, .images {
   max-width: 100%;
 }
 
-#logo {
-  width: 39px;
-  height: 13px;
-  @include div-with-bgImage('../images/Logo.png');
-  left: 1rem;
-  top: 1rem;
-  position: fixed;
-}
-
 .background {
   position: fixed;
   margin: auto;
@@ -42,7 +34,7 @@ img, .images {
   left: 0;
   width: 100vw;
   height: 100vh;
-  @include my-flex($justify: center, $align:center);
+  @include my-flex($justify: center, $align: center);
   z-index: -100;
 
   .full-moon {
@@ -56,60 +48,7 @@ img, .images {
   }
 }
 
-.fixed-layer {
-  position: fixed;
-  top: 0;
-  height: 100vh;
-  //width: 100%;
-  @include my-flex($flow: column, $justify: center);
 
-
-
-  .nav-wrapper {
-    display: flex;
-    height: 100vh;
-    flex-flow: column;
-    justify-content: center;
-    width: 200px;
-  }
-
-  nav {
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: center;
-    align-items: flex-start;
-    position: absolute;
-    width: 200px;
-    background: linear-gradient(to right, rgba(0,0,0,1), rgba(0,0,0,0))
-  }
-
-  .anchors {
-    margin: 0.3rem 1rem;
-    text-decoration: none;
-    color: $nav-list-color;
-    &.active {
-      color: $nav-active-color;
-      &:after {
-        content: '';
-        display: inline-block;
-        width: 0;
-        height: 0;
-        margin: 0 0 0 $list-arrow-size;
-        border-top: $list-arrow-size solid transparent;
-        border-right: $list-arrow-size*1.6 solid #fff;
-        border-bottom: $list-arrow-size solid transparent;
-      }
-      &:hover {
-        color: $font-color;
-      }
-    }
-    &:hover {
-      cursor: pointer;
-      color: $nav-hover-color;
-      transition: 0.25s;
-    }
-  }
-}
 
 // PC only
 @media screen and (min-width: $PC-threshold) {
@@ -134,10 +73,8 @@ img, .images {
 
 }
 
-
-
 .pages:nth-child(n+2):before {
-  content:'';
+  content: '';
   display: block;
   border-top: 1px solid #ccc;
   margin: 2rem 0;
@@ -150,6 +87,10 @@ img, .images {
 
 .pages {
   text-align: center;
+
+  .content-wrapper {
+    margin-top: 40px;
+  }
 
   .subtitles {
     margin: 1rem 0 0 0;
@@ -166,73 +107,6 @@ img, .images {
     height: 179px *$size-factor;
     @include div-with-bgImage('../images/theme-image.png');
   }
-
-  .clock-wrapper {
-    height: 70vh;
-    .clock-group {
-      @include my-flex($flow: column nowrap, $justify: center);
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 100%;
-      width: 100%;
-      z-index: -50;
-      .clock-elements {
-        $size-factor: 1;
-        $clock-width: 354px * $size-factor;
-        $clock-height: 358px * $size-factor;
-        width: $clock-width;
-        height: $clock-height;
-        max-width: 100%;
-        position: relative;
-        left: 8px;
-
-        .clock-partials {
-          position: absolute;
-          @include my-flex($justify: center, $align:center);
-          width: $clock-width;
-          height: $clock-height;
-        }
-        .clock-bg {
-          width: $clock-width;
-          height: $clock-height;
-          @include div-with-bgImage('../images/clock-bg.png');
-        }
-        .outer-ring {
-          $outer-ring-size-factor: 0.92;
-          width: $clock-width * $outer-ring-size-factor;
-          height: $clock-height * $outer-ring-size-factor;
-          @include div-with-bgImage('../images/outer-ring.png');
-        }
-        .inner-ring {
-          $inner-ring-size-factor: 0.85;
-          width: $clock-width * $inner-ring-size-factor;
-          height: $clock-height * $inner-ring-size-factor;
-          @include div-with-bgImage('../images/inner-ring.png');
-        }
-
-        .unit-text {
-          position: relative;
-          top: 100px;
-        }
-
-      }
-
-    }
-  }
-
-  #GMV-time {
-    position: relative;
-    top: -84px;
-    font-size: 24px;
-  }
-
-  #GMV-number {
-    font-size: 120px;
-    font-weight: 600;
-    text-shadow: 0 0 14px;
-  }
-
 
   .data-trend {
     width: 305px;
@@ -273,12 +147,14 @@ img, .images {
   .video-text {
     text-align: left;
     font-size: 1.2rem;
+    @media #{$mobile} {
+      padding-left: 1rem;
+    }
   }
 
   .data-global {
 
   }
-
 
   .default-bottom-text {
     margin: 1rem 0 4rem 0;
@@ -286,7 +162,6 @@ img, .images {
   }
 
 }
-
 
 .hidden {
   display: none !important;

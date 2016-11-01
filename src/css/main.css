@@ -1,3 +1,255 @@
+.clock-wrapper {
+  height: 70vh;
+}
+
+.clock-wrapper .clock-group {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: flex-start;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: -50;
+}
+
+.clock-wrapper .clock-group .clock-elements {
+  width: 354px;
+  height: 358px;
+  max-width: 100%;
+  position: relative;
+  left: 8px;
+}
+
+.clock-wrapper .clock-group .clock-elements .clock-partials {
+  position: absolute;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  width: 354px;
+  height: 358px;
+}
+
+.clock-wrapper .clock-group .clock-elements .clock-bg {
+  width: 354px;
+  height: 358px;
+  background-image: url("../images/clock-bg.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.clock-wrapper .clock-group .clock-elements .outer-ring {
+  width: 325.68px;
+  height: 329.36px;
+  background-image: url("../images/outer-ring.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.clock-wrapper .clock-group .clock-elements .inner-ring {
+  width: 300.9px;
+  height: 304.3px;
+  background-image: url("../images/inner-ring.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.clock-wrapper .clock-group .clock-elements .unit-text {
+  position: relative;
+  top: 100px;
+}
+
+.clock-wrapper .clock-group .clock-elements .GMV-indicator {
+  position: relative;
+  left: -100px;
+  top: 10px;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.clock-wrapper .clock-group .clock-elements .GMV-indicator .clock-description {
+  text-align: left;
+  margin: 0.5rem 0 0 -1.2rem;
+}
+
+.clock-wrapper #GMV-time {
+  position: relative;
+  top: -84px;
+  font-size: 24px;
+}
+
+.clock-wrapper #GMV-number {
+  font-size: 120px;
+  font-weight: 600;
+  text-shadow: 0 0 14px;
+}
+
+.gauge-wrapper {
+  /*position: absolute;
+  left: calc(50% + 120px);
+  top: 4rem;*/
+}
+
+@media (max-width: 720px) {
+  .gauge-wrapper {
+    position: relative;
+    width: 100vw;
+  }
+}
+
+@media (min-width: 720px) {
+  .gauge-wrapper {
+    position: absolute;
+    left: calc(50% + 120px);
+    top: 4rem;
+  }
+}
+
+.gauge-wrapper .gauge-elements {
+  width: 226px;
+  height: 226px;
+}
+
+.gauge-wrapper .gauge-partials {
+  position: absolute;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.gauge-wrapper .gauge-partials .gauge-bg {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  width: 226px;
+  height: 226px;
+  background-image: url("../images/gauge-mobile.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.gauge-wrapper .gauge-partials .gauge-number {
+  margin-left: 8px;
+}
+
+.gauge-wrapper #progressBar {
+  position: relative;
+  top: 3px;
+}
+
+.gauge-wrapper #mobileRatio {
+  font-size: 48px;
+  font-weight: 400;
+  text-shadow: 0 0 8px;
+}
+
+.gauge-wrapper .mobile-indicator {
+  position: relative;
+  top: 226px;
+  left: 108px;
+}
+
+.gauge-wrapper .gauges-description {
+  padding-left: 4rem;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.description-title {
+  font-size: 20px;
+  line-height: 30px;
+}
+
+.description-text {
+  font-size: 30px;
+  line-height: 30px;
+  text-shadow: 0px 2px 9px rgba(255, 255, 255, 0.6);
+}
+
+.fixed-layer {
+  position: fixed;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.fixed-layer #logo {
+  width: 39px;
+  height: 13px;
+  background-image: url("../images/Logo.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  left: 1rem;
+  top: 1rem;
+  position: fixed;
+}
+
+.fixed-layer .nav-wrapper {
+  display: flex;
+  height: 100vh;
+  flex-flow: column;
+  justify-content: center;
+  width: 200px;
+}
+
+.fixed-layer nav {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: flex-start;
+  position: absolute;
+  width: 200px;
+  background: linear-gradient(to right, black, transparent);
+}
+
+.fixed-layer .anchors {
+  margin: 0.3rem 1rem;
+  text-decoration: none;
+  color: #aaaaaa;
+}
+
+.fixed-layer .anchors.active {
+  color: #ffffff;
+}
+
+.fixed-layer .anchors.active:after {
+  content: '';
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin: 0 0 0 5px;
+  border-top: 5px solid transparent;
+  border-right: 8px solid #fff;
+  border-bottom: 5px solid transparent;
+}
+
+.fixed-layer .anchors.active:hover {
+  color: white;
+}
+
+.fixed-layer .anchors:hover {
+  cursor: pointer;
+  color: #ffffff;
+  transition: 0.25s;
+}
+
 .cards-wrapper {
   margin: 1rem 0;
   display: flex;
@@ -149,18 +401,6 @@ img, .images {
   max-width: 100%;
 }
 
-#logo {
-  width: 39px;
-  height: 13px;
-  background-image: url("../images/Logo.png");
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  background-position: center center;
-  left: 1rem;
-  top: 1rem;
-  position: fixed;
-}
-
 .background {
   position: fixed;
   margin: auto;
@@ -183,65 +423,6 @@ img, .images {
   height: 573px;
   margin: auto;
   z-index: -100;
-}
-
-.fixed-layer {
-  position: fixed;
-  top: 0;
-  height: 100vh;
-  display: flex;
-  flex-flow: column;
-  justify-content: center;
-  align-items: flex-start;
-}
-
-.fixed-layer .nav-wrapper {
-  display: flex;
-  height: 100vh;
-  flex-flow: column;
-  justify-content: center;
-  width: 200px;
-}
-
-.fixed-layer nav {
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
-  align-items: flex-start;
-  position: absolute;
-  width: 200px;
-  background: linear-gradient(to right, black, transparent);
-}
-
-.fixed-layer .anchors {
-  margin: 0.3rem 1rem;
-  text-decoration: none;
-  color: #aaaaaa;
-}
-
-.fixed-layer .anchors.active {
-  color: #ffffff;
-}
-
-.fixed-layer .anchors.active:after {
-  content: '';
-  display: inline-block;
-  width: 0;
-  height: 0;
-  margin: 0 0 0 5px;
-  border-top: 5px solid transparent;
-  border-right: 8px solid #fff;
-  border-bottom: 5px solid transparent;
-}
-
-.fixed-layer .anchors.active:hover {
-  color: white;
-}
-
-.fixed-layer .anchors:hover {
-  cursor: pointer;
-  color: #00f;
-  transition: 0.25s;
 }
 
 @media screen and (min-width: 720px) {
@@ -280,6 +461,10 @@ img, .images {
   text-align: center;
 }
 
+.pages .content-wrapper {
+  margin-top: 40px;
+}
+
 .pages .subtitles {
   margin: 1rem 0 0 0;
 }
@@ -296,85 +481,6 @@ img, .images {
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: center center;
-}
-
-.pages .clock-wrapper {
-  height: 70vh;
-}
-
-.pages .clock-wrapper .clock-group {
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
-  align-items: flex-start;
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  z-index: -50;
-}
-
-.pages .clock-wrapper .clock-group .clock-elements {
-  width: 354px;
-  height: 358px;
-  max-width: 100%;
-  position: relative;
-  left: 8px;
-}
-
-.pages .clock-wrapper .clock-group .clock-elements .clock-partials {
-  position: absolute;
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: center;
-  align-items: center;
-  width: 354px;
-  height: 358px;
-}
-
-.pages .clock-wrapper .clock-group .clock-elements .clock-bg {
-  width: 354px;
-  height: 358px;
-  background-image: url("../images/clock-bg.png");
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  background-position: center center;
-}
-
-.pages .clock-wrapper .clock-group .clock-elements .outer-ring {
-  width: 325.68px;
-  height: 329.36px;
-  background-image: url("../images/outer-ring.png");
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  background-position: center center;
-}
-
-.pages .clock-wrapper .clock-group .clock-elements .inner-ring {
-  width: 300.9px;
-  height: 304.3px;
-  background-image: url("../images/inner-ring.png");
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  background-position: center center;
-}
-
-.pages .clock-wrapper .clock-group .clock-elements .unit-text {
-  position: relative;
-  top: 100px;
-}
-
-.pages #GMV-time {
-  position: relative;
-  top: -84px;
-  font-size: 24px;
-}
-
-.pages #GMV-number {
-  font-size: 120px;
-  font-weight: 600;
-  text-shadow: 0 0 14px;
 }
 
 .pages .data-trend {
@@ -430,6 +536,12 @@ img, .images {
 .pages .video-text {
   text-align: left;
   font-size: 1.2rem;
+}
+
+@media (max-width: 720px) {
+  .pages .video-text {
+    padding-left: 1rem;
+  }
 }
 
 .pages .default-bottom-text {

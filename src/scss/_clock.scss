@@ -1,0 +1,155 @@
+@import "variables";
+@import "mixins";
+
+.clock-wrapper {
+  height: 70vh;
+  .clock-group {
+    @include my-flex($flow: column nowrap, $justify: center);
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: -50;
+    .clock-elements {
+      $size-factor: 1;
+      $clock-width: 354px * $size-factor;
+      $clock-height: 358px * $size-factor;
+      width: $clock-width;
+      height: $clock-height;
+      max-width: 100%;
+      position: relative;
+      left: 8px;
+
+      .clock-partials {
+        position: absolute;
+        @include my-flex($justify: center, $align:center);
+        width: $clock-width;
+        height: $clock-height;
+      }
+      .clock-bg {
+        width: $clock-width;
+        height: $clock-height;
+        @include div-with-bgImage('../images/clock-bg.png');
+      }
+      .outer-ring {
+        $outer-ring-size-factor: 0.92;
+        width: $clock-width * $outer-ring-size-factor;
+        height: $clock-height * $outer-ring-size-factor;
+        @include div-with-bgImage('../images/outer-ring.png');
+      }
+      .inner-ring {
+        $inner-ring-size-factor: 0.85;
+        width: $clock-width * $inner-ring-size-factor;
+        height: $clock-height * $inner-ring-size-factor;
+        @include div-with-bgImage('../images/inner-ring.png');
+      }
+
+      .unit-text {
+        position: relative;
+        top: 100px;
+      }
+
+      .GMV-indicator {
+        position: relative;
+        left: -100px;
+        top: 10px;
+        @include my-flex($flow:column nowrap, $justify:center, $align:center);
+
+        .clock-description {
+          text-align: left;
+          margin: 0.5rem 0 0 -1.2rem;
+        }
+
+      }
+
+    }
+
+  }
+
+  #GMV-time {
+    position: relative;
+    top: -84px;
+    font-size: 24px;
+  }
+  #GMV-number {
+    font-size: 120px;
+    font-weight: 600;
+    text-shadow: 0 0 14px;
+  }
+}
+
+.gauge-wrapper {
+  /*position: absolute;
+  left: calc(50% + 120px);
+  top: 4rem;*/
+  @media #{$mobile} {
+    position: relative;
+    //top: 80vh;
+    width: 100vw;
+  }
+  @media #{$PC} {
+    position: absolute;
+    left: calc(50% + 120px);
+    top: 4rem;
+  }
+  .gauge-elements {
+    $gauge-size: 226px;
+    width: $gauge-size;
+    height: $gauge-size;
+  }
+
+  .gauge-partials {
+    position: absolute;
+    @include my-flex($justify: center, $align:center);
+    width: 100%;
+    height: 100%;
+
+    .gauge-bg {
+      @include my-flex($justify: center, $align:center);
+      $gauge-size: 226px;
+      width: $gauge-size;
+      height: $gauge-size;
+      @include div-with-bgImage('../images/gauge-mobile.png');
+    }
+
+    .gauge-number {
+      margin-left: 8px;
+    }
+
+  }
+
+  #progressBar {
+    position: relative;
+    top: 3px;
+  }
+
+  #mobileRatio {
+    font-size: 48px;
+    font-weight: 400;
+    text-shadow: 0 0 8px;
+  }
+
+  .mobile-indicator {
+    position: relative;
+    top: 226px;
+    left: 108px;
+  }
+
+  .gauges-description {
+    padding-left: 4rem;
+    text-align: left;
+    white-space: nowrap;
+  }
+
+}
+
+.description-title {
+  font-size: 20px;
+  line-height: 30px;
+}
+.description-text {
+  font-size: 30px;
+  line-height: 30px;
+  text-shadow: 0px 2px 9px rgba(255,255,255,0.60);
+}
