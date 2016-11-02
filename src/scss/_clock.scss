@@ -30,8 +30,8 @@
 
       .GMV-title {
         position: absolute;
-        top: 0;
-        left: 0;
+        top: -4px;
+        left: 8px;
         font-size: 1.5rem;
       }
 
@@ -54,9 +54,10 @@
       .clock-bg {
         width: $clock-width;
         height: $clock-height;
-        max-width: 100vw;
-        max-height: $clock-height / $clock-width * 100vw;
+        //max-width: 100vw;
+        //max-height: $clock-height / $clock-width * 100vw;
         @include div-with-bgImage('../images/clock-bg.png');
+        position:absolute;
       }
       .outer-ring {
         $outer-ring-size-factor: 0.92;
@@ -83,7 +84,6 @@
         @include my-flex($flow: column nowrap, $justify: center, $align: center);
 
         .clock-description {
-
           @media #{$mobile} {
             margin-left: 5em;
             font-size: 80%;
@@ -113,13 +113,6 @@
         }
       }
 
-      #graduation1 {
-        transform: translate($clock-radius, $clock-radius);
-      }
-      #graduation2 {
-        transform: translate(-$clock-radius, -$clock-radius);
-      }
-
     }
 
   }
@@ -137,7 +130,6 @@
 }
 
 .gauge-wrapper {
-
   @include my-flex($justify: center);
   @media #{$mobile} {
     position: relative;
