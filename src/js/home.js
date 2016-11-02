@@ -170,7 +170,11 @@ $(function () {
 
         // load-more-button click event
         $('.btn-load-more').click(function () {
-            $(this).addClass('hidden').parent().find('.cards-wrapper').removeClass('cards-collapsed');
+            var $cardsWrapper = $(this).addClass('hidden').parent().find('.cards-wrapper')
+            $cardsWrapper.removeClass('cards-collapsed');
+            $('.card-image').each(function () {
+                $(this).attr('style', 'background-image: url(' + $(this).attr('data-image') + ')');
+            })
         });
 
         // scroll synchronize navigation bar
@@ -264,10 +268,19 @@ $(function () {
                     var cardsHtml = '';
                     var pageNumber = Number(index + 2);
                     var numArticles = articleArr.length;
+                    var json;
                     for (var i = 0; i < numArticles; i++) {
-                        cardsHtml += '<a class="card" target="_self" href="' + articleArr[i].url + '"><div class="card-image" style="background-image: url(' + articleArr[i].thumbnail +
-                            ')"><span class="corner-text">' + articleArr[i].keyword_to_display.split('| ')[1] + '</span></div><div class="text-container"><div class="card-text">' +
-                            articleArr[i].title + '</div></div></a>';
+                        json = articleArr[i];
+                        if (i < numInitial) {
+                            cardsHtml += '<a class="card" target="_self" href="' + json.url + '"><div class="card-image" data-image="' + json.thumbnail + '" style="background-image: url(' + json.thumbnail +
+                                ')"><span class="corner-text">' + json.keyword_to_display.split('| ')[1] + '</span></div><div class="text-container"><div class="card-text">' +
+                                json.title + '</div></div></a>';
+                        } else {
+                            cardsHtml += '<a class="card" target="_self" href="' + json.url + '"><div class="card-image" data-image="' + json.thumbnail +
+                                '"><span class="corner-text">' + json.keyword_to_display.split('| ')[1] + '</span></div><div class="text-container"><div class="card-text">' +
+                                json.title + '</div></div></a>';
+                        }
+
                     }
                     // insert articles into pages
                     var $cardsWrapper = $('#page' + pageNumber + ' .cards-wrapper');
