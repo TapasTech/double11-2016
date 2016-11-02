@@ -67,7 +67,10 @@ $(function () {
 
                 $('#graduationWrapper').append(graduationHtml);
 
-                animateClock(dataArray[dataArrLength-1].GMV, dataArray[dataArrLength-1].time, dataArray[dataArrLength-1].mobile_ratio);
+                // delay first animation
+                setTimeout( function() {
+                    animateClock(dataArray[dataArrLength-1].GMV, dataArray[dataArrLength-1].time, dataArray[dataArrLength-1].mobile_ratio);
+                }, 0.8 * 1000);
 
                 $('.shiny-point').on('mouseenter', function() {
                     $('.shiny-point').removeClass('active');

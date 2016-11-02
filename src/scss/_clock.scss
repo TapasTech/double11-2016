@@ -137,11 +137,12 @@
 }
 
 .gauge-wrapper {
+
   @include my-flex($justify: center);
   @media #{$mobile} {
     position: relative;
     width: 100vw;
-    //left: calc(50% - 120px);
+    margin: 4rem 0 0 0;
   }
   @media #{$PC} {
     position: absolute;
