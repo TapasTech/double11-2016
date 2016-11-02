@@ -57,10 +57,16 @@ $(function () {
         $.ajax({
             url: dataUrl,
             success: function(json) {
-                var dataArray = json.data;
-                var graduationHtml = '';
-                var dataArrLength = dataArray.length;
+                if (!json) {
+                    return;
+                }
 
+                var dataArray = json.data;
+                var dataArrLength = dataArray.length;
+                if (dataArrLength <= 0) {
+                    return;
+                }
+                var graduationHtml = '';
                 for(var i=0; i<dataArrLength; i++) {
                     graduationHtml += generatePoint(dataArray[i]);
                 }
@@ -170,11 +176,11 @@ $(function () {
 
         // load-more-button click event
         $('.btn-load-more').click(function () {
-            var $cardsWrapper = $(this).addClass('hidden').parent().find('.cards-wrapper')
+            var $cardsWrapper = $(this).addClass('hidden').parent().find('.cards-wrapper');
             $cardsWrapper.removeClass('cards-collapsed');
             $('.card-image').each(function () {
                 $(this).attr('style', 'background-image: url(' + $(this).attr('data-image') + ')');
-            })
+            });
         });
 
         // scroll synchronize navigation bar
