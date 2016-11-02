@@ -39,11 +39,14 @@ img, .images {
   z-index: -100;
 
   .full-moon {
-    //position: absolute;
     background: url(../images/full-moon.png) center center no-repeat;
     background-size: 100%;
     width: 595px;
     height: 573px;
+    @media #{$mobile} {
+      max-width: 100vw;
+      max-height: 573/595 * 100vw;
+    }
     margin: auto;
     z-index: -100;
   }
@@ -153,8 +156,7 @@ img, .images {
   #themeImage {
     $size-factor: 0.6;
     width: 226px *$size-factor;
-    max-width: 35%;
-    //height: 179px *$size-factor;
+    max-width: 25%;
   }
 
   .data-trend-default {

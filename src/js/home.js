@@ -57,17 +57,26 @@ $(function () {
         $.ajax({
             url: dataUrl,
             success: function(json) {
-                var dataArray = json.data;
-                var graduationHtml = '';
-                var dataArrLength = dataArray.length;
+                if (!json) {
+                    return;
+                }
 
+                var dataArray = json.data;
+                var dataArrLength = dataArray.length;
+                if (dataArrLength <= 0) {
+                    return;
+                }
+                var graduationHtml = '';
                 for(var i=0; i<dataArrLength; i++) {
                     graduationHtml += generatePoint(dataArray[i]);
                 }
 
                 $('#graduationWrapper').append(graduationHtml);
 
-                animateClock(dataArray[dataArrLength-1].GMV, dataArray[dataArrLength-1].time, dataArray[dataArrLength-1].mobile_ratio);
+                // delay first animation
+                setTimeout( function() {
+                    animateClock(dataArray[dataArrLength-1].GMV, dataArray[dataArrLength-1].time, dataArray[dataArrLength-1].mobile_ratio);
+                }, 0.8 * 1000);
 
                 $('.shiny-point').on('mouseenter', function() {
                     $('.shiny-point').removeClass('active');
@@ -112,7 +121,7 @@ $(function () {
                 $gmvTime.html(formateDate(new Date(time)));
                 counter++;
                 $gvmNumber.html( ( number * counter/numTimeSteps ).toFixed(0) );
-                $mobileRatio.html( (mobileRatio * counter/numTimeSteps).toFixed(0) )
+                $mobileRatio.html( (mobileRatio * counter/numTimeSteps).toFixed(0) );
             }, numIntervals);
             setTimeout(function() {
                 clearInterval(interval);
@@ -154,7 +163,7 @@ $(function () {
             e.preventDefault();
             $anchors.removeClass('active');
             $(this).addClass('active');
-            $('html,body').animate({scrollTop: $($(this).attr('href')).offset().top}, 500)
+            $('html,body').animate({scrollTop: $($(this).attr('href')).offset().top}, 500);
         });
 
         $('#navMobileMenu').on('click', function() {
@@ -167,8 +176,12 @@ $(function () {
 
         // load-more-button click event
         $('.btn-load-more').click(function () {
-            $(this).addClass('hidden').parent().find('.cards-wrapper').removeClass('cards-collapsed');
-        })
+            var $cardsWrapper = $(this).addClass('hidden').parent().find('.cards-wrapper');
+            $cardsWrapper.removeClass('cards-collapsed');
+            $('.card-image').each(function () {
+                $(this).attr('style', 'background-image: url(' + $(this).attr('data-image') + ')');
+            });
+        });
 
         // scroll synchronize navigation bar
         var scrollTriggered = false;
@@ -200,7 +213,7 @@ $(function () {
                     }
 
                     scrollTriggered = false;
-                }, 0.3 * 1000)
+                }, 0.3 * 1000);
             }
         });
     }
@@ -247,7 +260,7 @@ $(function () {
             success: function (json) {
                 json.data.forEach(function (value, index) {
                     for (var j = 0; j < typeArr.length; j++) {
-                        if (value['keyword_to_display'].indexOf(typeArr[j]) >= 0) {
+                        if (value.keyword_to_display.indexOf(typeArr[j]) >= 0) {
                             articleArr[j].push(value);
                         }
                     }
@@ -261,10 +274,19 @@ $(function () {
                     var cardsHtml = '';
                     var pageNumber = Number(index + 2);
                     var numArticles = articleArr.length;
+                    var json;
                     for (var i = 0; i < numArticles; i++) {
-                        cardsHtml += '<a class="card" target="_self" href="' + articleArr[i].url + '"><div class="card-image" style="background-image: url(' + articleArr[i].thumbnail +
-                            ')"><span class="corner-text">' + articleArr[i].keyword_to_display.split('| ')[1] + '</span></div><div class="text-container"><div class="card-text">' +
-                            articleArr[i].title + '</div></div></a>'
+                        json = articleArr[i];
+                        if (i < numInitial) {
+                            cardsHtml += '<a class="card" target="_self" href="' + json.url + '"><div class="card-image" data-image="' + json.thumbnail + '" style="background-image: url(' + json.thumbnail +
+                                ')"><span class="corner-text">' + json.keyword_to_display.split('| ')[1] + '</span></div><div class="text-container"><div class="card-text">' +
+                                json.title + '</div></div></a>';
+                        } else {
+                            cardsHtml += '<a class="card" target="_self" href="' + json.url + '"><div class="card-image" data-image="' + json.thumbnail +
+                                '"><span class="corner-text">' + json.keyword_to_display.split('| ')[1] + '</span></div><div class="text-container"><div class="card-text">' +
+                                json.title + '</div></div></a>';
+                        }
+
                     }
                     // insert articles into pages
                     var $cardsWrapper = $('#page' + pageNumber + ' .cards-wrapper');
@@ -275,7 +297,7 @@ $(function () {
                     }
 
                     // display default image if no article published
-                    if (numArticles == 0 && pageNumber == 4) {
+                    if (numArticles === 0 && pageNumber === 4) {
                         $cardsWrapper.after('' +'<div class="images"><img class="img-last-page" src="images/big-data-inspection.png"></div>' +
                             '<div class="default-bottom-text">双十一年鉴<br>敬请期待</div>');
                     }

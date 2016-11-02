@@ -115,17 +115,18 @@ gulp.task('images-prod', function () {
         gulp.src(['src/images/**/*.+(png|jpg|jpeg|gif|svg)'])
         // Caching images that ran through imagemin
         //     .pipe(cache(imagemin({interlaced: true})))
-            .pipe(rev())
+            /*.pipe(rev())
             .pipe(gulp.dest('dist/images'))
             .pipe(rev.manifest())
-            .pipe(gulp.dest('dist/rev/images'))
+            .pipe(gulp.dest('dist/rev/images'))*/
+            .pipe(gulp.dest('dist/images'))
     )
 });
 
 // copy html and common resources to dist
 gulp.task('copy', function () {
     return streamqueue({objectMode: true},
-        gulp.src(['src/**/*.html','src/**/*.txt','src/**/*.json', 'src/common/*'])
+        gulp.src(['src/**/*.html','src/**/*.txt','src/**/*.json', 'src/common/**/*.*'], {base: 'src'})
             .pipe(gulp.dest('dist/'))
     )
 });
@@ -136,11 +137,11 @@ gulp.task('rev', function () {
         // 更新html中引用的所有资源的路径
         gulp.src(['dist/rev/**/*.json', 'dist/*.html'])
             .pipe(revCollector({replaceReved: true}))
-            .pipe(gulp.dest('dist/')),
+            .pipe(gulp.dest('dist/'))
         // 更新css中引用的图片的路径
-        gulp.src(['dist/rev/images/*.json', 'dist/css/*.css'])
+        /*gulp.src(['dist/rev/images/!*.json', 'dist/css/!*.css'])
             .pipe(revCollector({replaceReved: true}))
-            .pipe(gulp.dest('dist/css/'))
+            .pipe(gulp.dest('dist/css/'))*/
     )
 });
 
