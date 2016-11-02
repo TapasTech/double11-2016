@@ -3,6 +3,8 @@
 $PC-threshold: 720px;
 $PC-wrapper-width: 732px;
 $mobile: "(max-width:" + $PC-threshold + ")";
+$iphone5: "(max-width: 320px)";
+$PC: "(min-width:" + $PC-threshold + ")";
 
 // background
 $bg-color: rgba(0,0,0,1);
@@ -15,11 +17,10 @@ $inner-ring-color: #cbac5b;
 // navigation list
 $nav-list-color: #aaaaaa;
 $nav-active-color: #ffffff;
-$nav-hover-color: #00f;
+$nav-hover-color: #ffffff;
 $list-arrow-size: 5px;
 
 // card links
-$corner-text-color: orange;
 $card-image-height: 156px;
 $card-text-container-height: 100px;
 $card-margin-vertical: 16px;

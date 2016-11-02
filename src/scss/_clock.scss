@@ -1,0 +1,217 @@
+@import "variables";
+@import "mixins";
+
+.clock-wrapper {
+  height: 70vh;
+
+  .clock-group {
+    @include my-flex($flow: column nowrap, $justify: center);
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+
+    .clock-elements {
+      $size-factor: 1;
+      $clock-width: 356px * $size-factor;
+      $clock-height: 356px * $size-factor;
+      width: $clock-width;
+      height: $clock-height;
+      max-width: 100%;
+      margin: auto;
+      position: relative;
+      @media #{$PC} {
+        left: 8px;
+      }
+      @media #{$iphone5} {
+        top: 18px;
+      }
+
+      .GMV-title {
+        position: absolute;
+        top: 0;
+        left: 0;
+        font-size: 1.5rem;
+      }
+
+      .shiny-point {
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        top: 50%;
+        left: 50%;
+      }
+
+      .clock-partials {
+        position: absolute;
+        @include my-flex($justify: center, $align: center);
+        width: $clock-width;
+        height: $clock-height;
+        max-width: 100vw;
+        max-height: $clock-height / $clock-width * 100vw;
+      }
+      .clock-bg {
+        width: $clock-width;
+        height: $clock-height;
+        max-width: 100vw;
+        max-height: $clock-height / $clock-width * 100vw;
+        @include div-with-bgImage('../images/clock-bg.png');
+      }
+      .outer-ring {
+        $outer-ring-size-factor: 0.92;
+        width: $clock-width * $outer-ring-size-factor;
+        height: $clock-height * $outer-ring-size-factor;
+        @include div-with-bgImage('../images/outer-ring.png');
+      }
+      .inner-ring {
+        $inner-ring-size-factor: 0.85;
+        width: $clock-width * $inner-ring-size-factor;
+        height: $clock-height * $inner-ring-size-factor;
+        @include div-with-bgImage('../images/inner-ring.png');
+      }
+
+      .unit-text {
+        position: relative;
+        top: 100px;
+      }
+
+      .GMV-indicator {
+        position: relative;
+        left: -100px;
+        top: 10px;
+        @include my-flex($flow: column nowrap, $justify: center, $align: center);
+
+        .clock-description {
+
+          @media #{$mobile} {
+            margin-left: 5em;
+            font-size: 80%;
+          }
+          text-align: left;
+          margin: 0.5rem 0 0 -1.2rem;
+        }
+
+      }
+      $clock-radius: 96px;
+      $graduation-diameter: 16px;
+      .shiny-point {
+        position: absolute;
+        width: $graduation-diameter;
+        height: $graduation-diameter;
+        background-color: #fff;
+        border-radius: 50%;
+        box-shadow: 0 0 6px;
+        z-index:10;
+
+        &:hover {
+          cursor: pointer;
+        }
+
+        &.active {
+          background-color: $theme-orange;
+        }
+      }
+
+      #graduation1 {
+        transform: translate($clock-radius, $clock-radius);
+      }
+      #graduation2 {
+        transform: translate(-$clock-radius, -$clock-radius);
+      }
+
+    }
+
+  }
+
+  #GMV-time {
+    position: relative;
+    top: -84px;
+    font-size: 24px;
+  }
+  #GMV-number {
+    font-size: 120px;
+    font-weight: 600;
+    text-shadow: 0 0 14px;
+  }
+}
+
+.gauge-wrapper {
+  @include my-flex($justify: center);
+  @media #{$mobile} {
+    position: relative;
+    width: 100vw;
+    //left: calc(50% - 120px);
+  }
+  @media #{$PC} {
+    position: absolute;
+    left: calc(50% + 120px);
+    top: 4rem;
+  }
+  .gauge-elements {
+    $gauge-size: 226px;
+    width: $gauge-size;
+    height: $gauge-size;
+    position: relative;
+  }
+
+  .gauge-partials {
+    position: absolute;
+    @include my-flex($justify: center, $align: center);
+    width: 100%;
+    height: 100%;
+
+    .gauge-bg {
+      @include my-flex($justify: center, $align: center);
+      $gauge-size: 226px;
+      width: $gauge-size;
+      height: $gauge-size;
+      @include div-with-bgImage('../images/gauge-mobile.png');
+    }
+
+    .gauge-number {
+      margin-left: 8px;
+    }
+  }
+
+  #progressBar {
+    position: relative;
+    top: 3px;
+  }
+
+  #mobileRatio {
+    font-size: 48px;
+    font-weight: 400;
+    text-shadow: 0 0 8px;
+  }
+
+  .mobile-indicator {
+    position: relative;
+    top: 226px;
+    left: 100px;
+    @media #{$mobile} {
+      left: 90px;
+    }
+  }
+
+  .gauges-description {
+    @media #{$mobile} {
+      font-size: 80%;
+      margin-left: 0;
+    }
+    margin-left: 4em;
+    text-align: left;
+    white-space: nowrap;
+  }
+}
+
+.description-title {
+  font-size: 20/16 * 1em;
+  line-height: 30px;
+}
+
+.description-text {
+  font-size: 30/16 * 1em;
+  line-height: 30px;
+  text-shadow: 0px 2px 9px rgba(255, 255, 255, 0.60);
+}

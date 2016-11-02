@@ -1,0 +1,72 @@
+@import "variables";
+@import "mixins";
+
+.fixed-layer {
+  position: fixed;
+  top: 0;
+  height: 100vh;
+  @include my-flex($flow: column, $justify: center);
+  z-index: 100;
+
+  @media #{$PC} {
+    #logo {
+      width: 39px;
+      height: 13px;
+      @include div-with-bgImage('../images/Logo.png');
+      left: 1rem;
+      top: 1rem;
+      position: fixed;
+    }
+
+    .nav-wrapper {
+      display: flex;
+      height: 100vh;
+      flex-flow: column;
+      justify-content: center;
+      width: 240px;
+    }
+
+    nav {
+      display: flex;
+      flex-flow: column nowrap;
+      justify-content: center;
+      align-items: flex-start;
+      position: absolute;
+      width: 200px;
+      background: linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+      z-index: 100;
+    }
+
+    .anchors {
+      margin: 0.3rem 0 0.3rem 1rem;
+      text-decoration: none;
+      color: $nav-list-color;
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: flex-start;
+      align-items: center;
+      &.active {
+        color: $nav-active-color;
+        &:after {
+          content: '';
+          display: inline-block;
+          width: 0;
+          height: 0;
+          margin: 0 0 0 $list-arrow-size;
+          border-top: $list-arrow-size solid transparent;
+          border-right: $list-arrow-size*1.6 solid #fff;
+          border-bottom: $list-arrow-size solid transparent;
+        }
+        &:hover {
+          color: $font-color;
+        }
+      }
+      &:hover {
+        cursor: pointer;
+        color: $nav-hover-color;
+        transition: 0.25s;
+      }
+    }
+  }
+
+}

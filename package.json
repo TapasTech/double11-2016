@@ -4,8 +4,9 @@
   "description": "数据盛典",
   "main": "index.js",
   "scripts": {
-    "dev": "gulp build",
-    "prod": "gulp prod"
+    "dev": "gulp dev",
+    "prod": "gulp prod",
+    "rev": "gulp rev"
   },
   "repository": {
     "type": "git",
