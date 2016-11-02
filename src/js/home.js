@@ -4,49 +4,22 @@
 
 $(function () {
 
-    init();
+    var env = 'prod';
 
     var CLOCK_POINT_WIDTH = 16;
 
-    function init() {
+    init();
 
+    function init() {
         // load GMV and mobile-ratio data
         loadDynamicData();
-
+        // register DOM events
         registerEvents();
-
+        // load images for page 2-4
         loadEventImages();
-
+        // load article API
         loadArticleData();
     }
-
-    function loadEventImages() {
-        // load data-trend, national and global data images
-        // trend data image
-        $('<img/>').attr('src', 'images/data-trend.png').load(function() {
-            $(this).remove(); // prevent memory leaks
-            $('#divDataTrend').append('<div class="image-title"><h4 class="subtitles">2016天猫11.11购物狂欢节</h4>' +
-                '<h3 class="description">总成交额趋势</h3></div><img src="images/data-trend.png"/>');
-        }).error(function() {
-            $('#divDataTrend').append('<div id="data-trend-default"><div class="images data-trend-default"></div><div class="text-under-image">更多数据敬请期待...</div></div>');
-        });
-
-        // global data image
-        $('<img/>').attr('src', 'images/global-data-test.png').load(function() {
-            $(this).remove(); // prevent memory leaks
-            $('#divGlobalData').append('<div class="image-title"><h4 class="subtitles">2016天猫11.11购物狂欢节</h4><h3 class="description">' +
-                '全球交易国家/地区排行</h3></div><div class="images"><img src="images/global-data-test.png"></div>');
-        });
-
-        // national data image
-        $('<img/>').attr('src', 'images/national-data-test.png').load(function() {
-            $(this).remove(); // prevent memory leaks
-            $('#divNationalData').append('<div class="image-title"><h4 class="subtitles">2016天猫11.11购物狂欢节</h4><h3 class="description">' +
-                '全天交易额省份TOP10</h3></div><div class="images"><img src="images/national-data-test.png"/></div>');
-        });
-    }
-
-    var dataArray = [];
 
     function loadDynamicData() {
         // load total-amout and mobile ratio data from OSS
@@ -75,11 +48,16 @@ $(function () {
             }
         });*/
 
+        var dataUrl;
+        if (env == 'dev') {
+            dataUrl = "./data-test.json";
+        } else {
+            dataUrl = "./data.json";
+        }
         $.ajax({
-            url: "./json/mock_api_data.json",
+            url: dataUrl,
             success: function(json) {
                 var dataArray = json.data;
-
                 var graduationHtml = '';
                 var dataArrLength = dataArray.length;
 
@@ -158,7 +136,6 @@ $(function () {
             });
         }
 
-
         function formateDate(date) {
             var hours = prependZero(date.getHours());
             var minutes = prependZero(date.getMinutes());
@@ -194,36 +171,79 @@ $(function () {
         })
 
         // scroll synchronize navigation bar
-        /*var scrollTriggered = false;
+        var scrollTriggered = false;
+        var lastScrollY;
+        var currentScrollY;
+        var offset = 150;
         $(window).scroll( function() {
             if (!scrollTriggered) {
+                lastScrollY = window.scrollY;
                 scrollTriggered = true;
-                for (var i=1; i<4; i++) {
-                    if ($('#page' + i).isVisible(50)) {
-                        $anchors.removeClass('active');
-                        $('a[href=#page' + i +']').addClass('active');
-                    }
-                }
+
                 setTimeout(function () {
+                    currentScrollY = window.scrollY;
+
+                    if (currentScrollY > lastScrollY) {  // scrolling down
+                        for (var i=1; i<=4; i++) {
+                            if ($('#page' + i).isVisible(offset)) {
+                                $anchors.removeClass('active');
+                                $('a[href=#page' + i +']').addClass('active');
+                            }
+                        }
+                    } else {
+                        for (var j=4; j>0; j--) {
+                            if ($('#page' + j).isVisible(offset)) {
+                                $anchors.removeClass('active');
+                                $('a[href=#page' + j +']').addClass('active');
+                            }
+                        }
+                    }
+
                     scrollTriggered = false;
                 }, 0.3 * 1000)
             }
-        });*/
+        });
     }
 
+    function loadEventImages() {
+        // trend data image
+        $('<img/>').attr('src', 'images/data-trend.png').load(function() {
+            $(this).remove(); // prevent memory leaks
+            $('#divDataTrend').append('<div class="image-title"><h4 class="subtitles">2016天猫11.11购物狂欢节</h4>' +
+                '<h3 class="description">总成交额趋势</h3></div><img src="images/data-trend.png"/>');
+        }).error(function() {
+            $('#divDataTrend').append('<div id="data-trend-default"><div class="images"><img src="images/data-trend-default.png"></div><div class="text-under-image">更多数据敬请期待...</div></div>');
+        });
+        // global data image
+        $('<img/>').attr('src', 'images/global-data.png').load(function() {
+            $(this).remove(); // prevent memory leaks
+            $('#divGlobalData').append('<div class="image-title"><h4 class="subtitles">2016天猫11.11购物狂欢节</h4><h3 class="description">' +
+                '全球交易国家/地区排行</h3></div><div class="images"><img src="images/global-data-test.png"></div>');
+        });
+        // national data image
+        $('<img/>').attr('src', 'images/national-data.png').load(function() {
+            $(this).remove(); // prevent memory leaks
+            $('#divNationalData').append('<div class="image-title"><h4 class="subtitles">2016天猫11.11购物狂欢节</h4><h3 class="description">' +
+                '全天交易额省份TOP10</h3></div><div class="images"><img src="images/national-data-test.png"/></div>');
+        });
+    }
 
     function loadArticleData() {
-        var typeArr = ['双11剁手进行时','消费新边界','大数据洞察'];  // real types
-        // var typeArr = ['消费', '2015', '数据'];  // fake types for dev only
+        var typeArr = ['双11剁手进行时','消费新边界','大数据洞察'];
         var numTypes = typeArr.length;
         var articleArr = [];
         for (var i = 0; i < numTypes; i++) {
             articleArr[i] = [];
         }
         // load article info
+        var articleApiUrl;
+        if (env=='dev') {
+            articleApiUrl = '../json/mock_api_articles.json';
+        } else {
+            articleApiUrl = 'http://www.dtcj.com/web_api/topics/shuang_11_zhuan_ti?max=50';
+        }
         $.ajax({
-            url: 'http://www.dtcj.com/web_api/topics/shuang_11_zhuan_ti?max=50',  // real API
-            // url: '../json/mock_api_articles.json',   // test API
+            url: articleApiUrl,
             success: function (json) {
                 json.data.forEach(function (value, index) {
                     for (var j = 0; j < typeArr.length; j++) {
@@ -240,8 +260,7 @@ $(function () {
                     var numInitial = 4;
                     var cardsHtml = '';
                     var pageNumber = Number(index + 2);
-                    // for (var i = 0; i<numInitial; i++) {
-                    var numArticles = articleArr.length
+                    var numArticles = articleArr.length;
                     for (var i = 0; i < numArticles; i++) {
                         cardsHtml += '<a class="card" target="_self" href="' + articleArr[i].url + '"><div class="card-image" style="background-image: url(' + articleArr[i].thumbnail +
                             ')"><span class="corner-text">' + articleArr[i].keyword_to_display.split('| ')[1] + '</span></div><div class="text-container"><div class="card-text">' +
@@ -258,7 +277,6 @@ $(function () {
                     // display default image if no article published
                     if (numArticles == 0 && pageNumber == 4) {
                         $cardsWrapper.after('' +'<div class="images"><img class="img-last-page" src="images/big-data-inspection.png"></div>' +
-                            // '<div class="images big-data-inspection"></div>' +
                             '<div class="default-bottom-text">双十一年鉴<br>敬请期待</div>');
                     }
                 }
