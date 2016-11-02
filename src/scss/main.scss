@@ -39,7 +39,7 @@ img, .images {
   z-index: -100;
 
   .full-moon {
-    position: absolute;
+    //position: absolute;
     background: url(../images/full-moon.png) center center no-repeat;
     background-size: 100%;
     width: 595px;
@@ -193,16 +193,6 @@ img, .images {
     }
 
   }
-
-  /*.big-data-inspection {
-    max-width: 362px;
-    height: 181px;
-    @include div-with-bgImage('../images/big-data-inspection.png');
-    @media #{$mobile} {
-      width: 100vw;
-      height: 50vw;
-    }
-  }*/
 
   .img-last-page {
     max-width: 60%;

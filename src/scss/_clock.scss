@@ -14,8 +14,8 @@
 
     .clock-elements {
       $size-factor: 1;
-      $clock-width: 354px * $size-factor;
-      $clock-height: 358px * $size-factor;
+      $clock-width: 356px * $size-factor;
+      $clock-height: 356px * $size-factor;
       width: $clock-width;
       height: $clock-height;
       max-width: 100%;
@@ -33,6 +33,14 @@
         top: 0;
         left: 0;
         font-size: 1.5rem;
+      }
+
+      .shiny-point {
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        top: 50%;
+        left: 50%;
       }
 
       .clock-partials {
@@ -88,13 +96,13 @@
       $clock-radius: 96px;
       $graduation-diameter: 16px;
       .shiny-point {
+        position: absolute;
         width: $graduation-diameter;
         height: $graduation-diameter;
         background-color: #fff;
         border-radius: 50%;
         box-shadow: 0 0 6px;
-        z-index:100;
-
+        z-index:10;
 
         &:hover {
           cursor: pointer;
@@ -164,7 +172,6 @@
     .gauge-number {
       margin-left: 8px;
     }
-
   }
 
   #progressBar {
@@ -188,7 +195,6 @@
   }
 
   .gauges-description {
-
     @media #{$mobile} {
       font-size: 80%;
       margin-left: 0;
@@ -197,7 +203,6 @@
     text-align: left;
     white-space: nowrap;
   }
-
 }
 
 .description-title {

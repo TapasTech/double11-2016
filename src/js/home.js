@@ -6,12 +6,12 @@ $(function () {
 
     init();
 
+    var CLOCK_POINT_WIDTH = 16;
+
     function init() {
 
         // load GMV and mobile-ratio data
         loadDynamicData();
-
-        animateProgressBar(1);
 
         registerEvents();
 
@@ -80,52 +80,82 @@ $(function () {
             success: function(json) {
                 var dataArray = json.data;
 
-                for(var i=0; i<dataArray.length; i++) {
+                var graduationHtml = '';
+                var dataArrLength = dataArray.length;
 
-                    // generate shiny point
-                    generatePoint(dataArray[i].time);
-
+                for(var i=0; i<dataArrLength; i++) {
+                    graduationHtml += generatePoint(dataArray[i]);
                 }
 
-                animateClock(dataArray[1].GMV, dataArray[1].time);
+                $('#graduationWrapper').append(graduationHtml);
+
+                animateClock(dataArray[dataArrLength-1].GMV, dataArray[dataArrLength-1].time, dataArray[dataArrLength-1].mobile_ratio);
 
                 $('.shiny-point').on('mouseenter', function() {
                     $('.shiny-point').removeClass('active');
-                    $(this).addClass('active');
-                })
+                    var $this = $(this);
+                    $this.addClass('active');
+                    animateClock($this.attr('data-gmv'), $this.attr('data-time'), $this.attr('data-mobile-ratio'));
+                });
 
+                function calcHour(time) {
+                    return time.getHours() + time.getMinutes()/60;
+                }
+
+                function generatePoint(data) {
+                    var clockRadius = 136;   // px, assuming clock size is fixed
+                    var angle = calcHour(new Date(data.time)) / 24 * ( 2 * Math.PI);
+                    var trans = [
+                        parseInt(clockRadius * Math.sin(angle)),
+                        parseInt(-clockRadius * Math.cos(angle)),
+                    ];
+                    trans = trans.map(function (point) {
+                        return (point - CLOCK_POINT_WIDTH / 2) + 'px';
+                    });
+                    return '<div class="shiny-point" data-time="' + data.time + '" data-gmv="' + data.GMV +
+                        '" data-mobile-ratio="' + data.mobile_ratio + '" style="transform:translate(' + trans[0] + ',' + trans[1] + ')" ></div>';
+                }
             }
         });
-
-        function generatePoint(time) {
-
-        }
 
         // update GMV data
         var $gmvTime = $('#GMV-time');
         var $gvmNumber = $('#GMV-number');
-       /* var number = 582;
-        var latestTime = "2016-11-11 9:35:20";
+        var $mobileRatio = $('#mobileRatio');
 
-        animateClock(number, latestTime);*/
-
-        function animateClock(number, time) {
-
-            var timeAnimation = 1 * 1000;
-            var numTimeSteps = 25;
-            var numIntervals = parseInt(timeAnimation / numTimeSteps);
-
+        function animateClock(number, time, mobileRatio) {
+            animateProgressBar(mobileRatio);
+            mobileRatio *= 100;
+            var timeAnimation = 1000;  //ms
+            var numTimeSteps = 25;  // number of time steps during animation period
+            var numIntervals = parseInt(timeAnimation / numTimeSteps);  // time span of each time step
             var counter = 0;
             var interval = setInterval(function() {
                 $gmvTime.html(formateDate(new Date(time)));
                 counter++;
                 $gvmNumber.html( ( number * counter/numTimeSteps ).toFixed(0) );
+                $mobileRatio.html( (mobileRatio * counter/numTimeSteps).toFixed(0) )
             }, numIntervals);
-
             setTimeout(function() {
                 clearInterval(interval);
-                $gvmNumber.html( number);
+                $gvmNumber.html(number);
+                $mobileRatio.html(mobileRatio.toFixed(0));
             }, timeAnimation);
+        }
+
+        function animateProgressBar(ratio) {
+            var fullPercentage = 0.74;
+            $('#progressBar').circleProgress({
+                value: ratio * fullPercentage,
+                size: 194,
+                startAngle: -Math.PI * 1.24,
+                fill: {
+                    gradient: ["rgba(255,87,51,0.3)", "rgba(255,87,51,0.7)"]
+                },
+                emptyFill: "rgba(255,255,255,0)",
+                thickness: 24,
+                animation: { duration: 1200}
+            });
         }
 
 
@@ -134,9 +164,10 @@ $(function () {
             var minutes = prependZero(date.getMinutes());
             var seconds = prependZero(date.getSeconds());
             return hours + ":" + minutes + ":" + seconds;
-        }
-        function prependZero(value) {
-            return (value < 10) ? "0" + value : value;
+
+            function prependZero(value) {
+                return (value < 10) ? "0" + value : value;
+            }
         }
     }
 
@@ -163,7 +194,7 @@ $(function () {
         })
 
         // scroll synchronize navigation bar
-        var scrollTriggered = false;
+        /*var scrollTriggered = false;
         $(window).scroll( function() {
             if (!scrollTriggered) {
                 scrollTriggered = true;
@@ -177,24 +208,9 @@ $(function () {
                     scrollTriggered = false;
                 }, 0.3 * 1000)
             }
-        });
+        });*/
     }
 
-    function animateProgressBar(ratio) {
-        // var fullPercentage = 0.74;
-        var fullPercentage = 0.74;
-        $('#progressBar').circleProgress({
-            value: ratio * fullPercentage,
-            size: 194,
-            startAngle: -Math.PI * 1.24,
-            fill: {
-                gradient: ["rgba(255,87,51,0.3)", "rgba(255,87,51,0.7)"]
-            },
-            emptyFill: "rgba(255,255,255,0)",
-            thickness: 24,
-            animation: { duration: 1200}
-        });
-    }
 
     function loadArticleData() {
         var typeArr = ['双11剁手进行时','消费新边界','大数据洞察'];  // real types
