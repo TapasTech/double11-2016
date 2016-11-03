@@ -344,7 +344,8 @@
 }
 
 .cards-wrapper {
-  margin: 1rem 0;
+  width: 104%;
+  padding: 0 2%;
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
@@ -352,9 +353,12 @@
 }
 
 .cards-wrapper .card {
+  position: relative;
   width: 353px;
+  height: 256px;
   margin: 1rem 0.25rem;
   z-index: 1;
+  overflow: visible;
   display: flex;
   flex-flow: column nowrap;
   justify-content: flex-start;
@@ -363,29 +367,50 @@
 
 .cards-wrapper .card:hover {
   cursor: pointer;
-  position: relative;
-  top: -3px;
-  transition: 0.45s;
+  transition: 1.8s;
 }
 
 .cards-wrapper .card:hover .card-text {
   background: #763930;
 }
 
-.cards-wrapper .card:hover .card-image {
-  background-size: 103% 103%;
-  transition: 0.25s;
-}
-
 .cards-wrapper .card:hover .text-container {
   z-index: -10;
 }
 
-.card-image {
-  background-image: url("");
+.cards-wrapper .card:hover .card-frame-img {
+  display: block;
+}
+
+.cards-wrapper .card:hover .card-image:after {
+  background: rgba(255, 87, 51, 0.3);
+}
+
+.cards-wrapper .card .card-hover-frame {
+  position: relative;
+  overflow: visible;
+}
+
+.cards-wrapper .card .card-frame-img {
+  display: none;
+  position: absolute;
+  background-image: url("../images/card-wrapper-frame.png");
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: center center;
+  height: 112.5%;
+  width: 110%;
+  left: -5%;
+  top: -6.25%;
+}
+
+@media (max-width: 720px) {
+  .cards-wrapper .card .card-frame-img {
+    display: none !important;
+  }
+}
+
+.card-image {
   position: relative;
   width: 100%;
   height: 156px;
@@ -405,10 +430,17 @@
   color: #FF5733;
 }
 
+.card-image:after {
+  content: '';
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 0, 0, 0);
+  position: absolute;
+  top: 0;
+}
+
 .text-container {
   width: 100%;
-  height: 100px;
-  flex-grow: 1;
   color: white;
 }
 
@@ -488,7 +520,7 @@ body {
   padding: 0;
   background: black;
   color: white;
-  font-family: "PingFang SC";
+  font-family: "PingFang SC", "Microsoft YaHei";
   overflow-x: hidden;
 }
 
@@ -533,8 +565,9 @@ img, .images {
 
 @media screen and (min-width: 720px) {
   .wrapper {
-    width: 732px;
+    width: 756px;
     margin: auto;
+    padding: 0 12px;
   }
   .nav-mobile {
     display: none;
@@ -611,6 +644,7 @@ img, .images {
 
 .pages {
   text-align: center;
+  margin: auto;
 }
 
 .pages .content-wrapper {
@@ -683,7 +717,7 @@ img, .images {
 }
 
 .pages .video {
-  width: 732px;
+  width: 756px;
   max-width: 731px;
   height: 371px;
   background-image: url("../images/video.png");

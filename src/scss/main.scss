@@ -15,7 +15,7 @@ body {
   padding: 0;
   background: $bg-color;
   color: $font-color;
-  font-family: "PingFang SC";
+  font-family: "PingFang SC", "Microsoft YaHei";
   overflow-x: hidden;
 }
 
@@ -59,6 +59,7 @@ img, .images {
   .wrapper {
     width: $PC-wrapper-width;
     margin: auto;
+    padding: 0 $PC-wrapper-padding;
   }
   .nav-mobile {
     display: none;
@@ -134,6 +135,7 @@ img, .images {
 
 .pages {
   text-align: center;
+  margin: auto;
 
   .content-wrapper {
     margin: 80px 0 40px 0;

@@ -232,7 +232,7 @@ $(function () {
     }
 
     function loadArticleData() {
-        var typeArr = ['双11剁手进行时','消费新边界','大数据洞察'];
+        var typeArr = ['双11剁手进行时','消费新边界智库','大数据洞察'];
         var numTypes = typeArr.length;
         var articleArr = [];
         for (var i = 0; i < numTypes; i++) {
@@ -267,13 +267,13 @@ $(function () {
                     var json;
                     for (var i = 0; i < numArticles; i++) {
                         json = articleArr[i];
-                        cardsHtml += '<a class="card" target="_self" href="' + json.url + '"><div class="card-image"' +
+                        cardsHtml += '<a class="card" target="_self" href="' + json.url + '"><div class="card-hover-frame"><div class="card-frame-img"></div><div class="card-image"' +
                             '"><img ';
                         if (i<numInitial) {
                             cardsHtml += 'src="' + json.thumbnail + '"';
                         }
                         cardsHtml += ' data-image="' + json.thumbnail +'"><span class="corner-text">' + json.keyword_to_display.split('| ')[1] + '</span></div><div class="text-container"><div class="card-text">' +
-                            json.title + '</div></div></a>';
+                            json.title + '</div></div></div></a>';
                     }
                     // insert articles into pages
                     var $cardsWrapper = $('#page' + pageNumber + ' .cards-wrapper');

@@ -1,7 +1,8 @@
 
 // device geometry related
 $PC-threshold: 720px;
-$PC-wrapper-width: 732px;
+$PC-wrapper-padding: 12px;
+$PC-wrapper-width: 732px + $PC-wrapper-padding*2;
 $mobile: "(max-width:" + $PC-threshold + ")";
 $iphone5: "(max-width: 320px)";
 $PC: "(min-width:" + $PC-threshold + ")";

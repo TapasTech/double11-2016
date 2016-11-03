@@ -2,38 +2,62 @@
 @import "variables";
 
 .cards-wrapper {
-  margin: 1rem 0;
+  width: 104%;
+  padding: 0 2%;
   @include my-flex($flow:row wrap);
 
   .card {
+    position: relative;
     width: 353px;
+    height: 256px;
     margin: 1rem 0.25rem;
     z-index: 1;
+    overflow: visible;
 
     @include my-flex($flow:column nowrap, $justify: flex-start);
 
     &:hover {
+      $hover-transition: 1.8s;
       cursor: pointer;
-      position: relative;
-      top: -3px;
-      transition: 0.45s;
+      transition: $hover-transition;
       .card-text {
         background: #763930;
-      }
-      .card-image {
-        background-size: 103% 103%;
-        transition: 0.25s;
       }
       .text-container {
         z-index: -10;
       }
+
+      .card-frame-img {
+        display: block;
+      }
+      .card-image:after {
+        background: rgba(255,87,51,0.3);
+      }
+    }
+
+    .card-hover-frame {
+      position: relative;
+      overflow: visible;
+    }
+
+    .card-frame-img {
+      display: none;
+      @media #{$mobile} {
+        display: none !important;
+      }
+      position: absolute;
+      @include div-with-bgImage('../images/card-wrapper-frame.png');
+      $offset: 10%;
+      height: 100% + $offset*1.25;
+      width: 100% + $offset;
+      left: -$offset/2;
+      top: -$offset/1.6;
     }
 
   }
 }
 
 .card-image {
-  @include div-with-bgImage('');
   position: relative;
   width: 100%;
   height: $card-image-height;
@@ -47,14 +71,26 @@
     left: 0;
     background: #000;
     color: $theme-orange;
+
+
+
+  }
+
+  &:after {
+    content: '';
+    width: 100%;
+    height: 100%;
+    background: rgba(255,0,0,0);
+    position: absolute;
+    top: 0;
   }
 
 }
 
 .text-container {
   width: 100%;
-  height: $card-text-container-height;
-  flex-grow: 1;
+  //height: $card-text-container-height;
+  //flex-grow: 1;
   color: $font-color;
 }
 
