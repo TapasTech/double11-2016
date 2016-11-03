@@ -6,7 +6,7 @@ $(function () {
 
     var env = 'prod';
 
-    var CLOCK_POINT_WIDTH = 16;
+    var CLOCK_POINT_WIDTH = 24;
     var timeStamp = new Date().getTime();
     init();
 
@@ -216,26 +216,13 @@ $(function () {
     }
 
     function loadEventImages() {
-        // trend data image
-        $('<img/>').attr('src', 'images/data-trend.png').load(function() {
-            $(this).remove(); // prevent memory leaks
-            $('#divDataTrend').append('<div class="image-title"><h4 class="subtitles">2016天猫11.11购物狂欢节</h4>' +
-                '<h3 class="description">总成交额趋势</h3></div><img src="images/data-trend.png"/>');
-        }).error(function() {
-            $('#divDataTrend').append('<div id="data-trend-default"><div class="images"><img src="images/data-trend-default.png"></div><div class="text-under-image">更多数据敬请期待...</div></div>');
-        });
-        // global data image
-        $('<img/>').attr('src', 'images/global-data.png').load(function() {
-            $(this).remove(); // prevent memory leaks
-            $('#divGlobalData').append('<div class="image-title"><h4 class="subtitles">2016天猫11.11购物狂欢节</h4><h3 class="description">' +
-                '全球交易国家/地区排行</h3></div><div class="images"><img src="images/global-data-test.png"></div>');
-        });
-        // national data image
-        $('<img/>').attr('src', 'images/national-data.png').load(function() {
-            $(this).remove(); // prevent memory leaks
-            $('#divNationalData').append('<div class="image-title"><h4 class="subtitles">2016天猫11.11购物狂欢节</h4><h3 class="description">' +
-                '全天交易额省份TOP10</h3></div><div class="images"><img src="images/national-data-test.png"/></div>');
-        });
+        // load images (from image1.png to image5.png)
+        for (var i = 1; i <= 5; i++) {
+            $('<img/>').attr('src', 'images/image'+ i + '.png').load(function(i) {
+                $(this).remove(); // prevent memory leaks
+                $('#remoteImageWrapper').append('<div class="images">' + i.target.outerHTML +'</div>');
+            });
+        }
     }
 
     function loadArticleData() {

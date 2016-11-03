@@ -39,14 +39,6 @@
   font-size: 1.5rem;
 }
 
-.clock-wrapper .clock-group .clock-elements .shiny-point {
-  position: absolute;
-  width: 16px;
-  height: 16px;
-  top: 50%;
-  left: 50%;
-}
-
 .clock-wrapper .clock-group .clock-elements .clock-partials {
   position: absolute;
   display: flex;
@@ -120,20 +112,30 @@
 
 .clock-wrapper .clock-group .clock-elements .shiny-point {
   position: absolute;
-  width: 16px;
-  height: 16px;
-  background-color: #fff;
-  border-radius: 50%;
-  box-shadow: 0 0 6px;
+  top: 50%;
+  left: 50%;
+  width: 24px;
+  height: 24px;
   z-index: 10;
+  background-image: url("../images/graduation_normal.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
 }
 
 .clock-wrapper .clock-group .clock-elements .shiny-point:hover {
+  background-image: url("../images/graduation_hover.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
   cursor: pointer;
 }
 
 .clock-wrapper .clock-group .clock-elements .shiny-point.active {
-  background-color: #FF5733;
+  background-image: url("../images/graduation_hover.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
 }
 
 .clock-wrapper #GMV-time {
@@ -322,7 +324,7 @@
     height: 0;
     margin: 0 0 0 5px;
     border-top: 5px solid transparent;
-    border-right: 8px solid #fff;
+    border-right: 8px solid #FF5733;
     border-bottom: 5px solid transparent;
   }
   .fixed-layer .anchors.active:hover {
@@ -346,6 +348,7 @@
 .cards-wrapper .card {
   width: 353px;
   margin: 1rem 0.25rem;
+  z-index: 1;
   display: flex;
   flex-flow: column nowrap;
   justify-content: flex-start;
@@ -585,6 +588,7 @@ img, .images {
   content: '';
   display: block;
   border-top: 1px solid #ccc;
+  opacity: 0.3;
   margin: 2rem 0;
   height: 2rem;
 }
@@ -599,7 +603,7 @@ img, .images {
 }
 
 .pages .content-wrapper {
-  margin: 80px 0 60px 0;
+  margin: 80px 0 40px 0;
 }
 
 @media (max-width: 720px) {
@@ -608,7 +612,7 @@ img, .images {
   }
 }
 
-.pages .content-wrapper .remote-image-wrapper {
+.pages .content-wrapper .images {
   margin: 3rem 0 1rem 0;
 }
 

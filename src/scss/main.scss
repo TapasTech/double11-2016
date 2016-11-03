@@ -122,6 +122,7 @@ img, .images {
   content: '';
   display: block;
   border-top: 1px solid #ccc;
+  opacity: 0.3;
   margin: 2rem 0;
   height: 2rem;
 }
@@ -135,12 +136,12 @@ img, .images {
   text-align: center;
 
   .content-wrapper {
-    margin: 80px 0 60px 0;
+    margin: 80px 0 40px 0;
     @media #{$mobile} {
       margin-top: 120px;
     }
 
-    .remote-image-wrapper {
+    .images {
       margin: 3rem 0 1rem 0;
     }
   }
