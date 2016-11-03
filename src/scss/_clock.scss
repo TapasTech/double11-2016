@@ -103,9 +103,7 @@
           @include div-with-bgImage('../images/graduation_hover.png');
         }
       }
-
     }
-
   }
 
   #GMV-time {
@@ -113,10 +111,13 @@
     top: -84px;
     font-size: 24px;
   }
-  #GMV-number {
+  .gmv-number {
     font-size: 120px;
     font-weight: 600;
     text-shadow: 0 0 14px;
+  }
+  .size-reduced {
+    font-size: 96px;
   }
 }
 
@@ -126,6 +127,9 @@
     position: relative;
     width: 100vw;
     margin: 4rem 0 0 0;
+  }
+  @media #{$iphone5} {
+    margin: 6rem 0 0 0;
   }
   @media #{$PC} {
     position: absolute;
@@ -209,5 +213,5 @@
 .description-text {
   font-size: 30/16 * 1em;
   line-height: 30px;
-  text-shadow: 0px 2px 9px rgba(255, 255, 255, 0.60);
+  text-shadow: 0 2px 9px rgba(255, 255, 255, 0.60);
 }

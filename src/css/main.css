@@ -144,10 +144,14 @@
   font-size: 24px;
 }
 
-.clock-wrapper #GMV-number {
+.clock-wrapper .gmv-number {
   font-size: 120px;
   font-weight: 600;
   text-shadow: 0 0 14px;
+}
+
+.clock-wrapper .size-reduced {
+  font-size: 96px;
 }
 
 .gauge-wrapper {
@@ -162,6 +166,12 @@
     position: relative;
     width: 100vw;
     margin: 4rem 0 0 0;
+  }
+}
+
+@media (max-width: 320px) {
+  .gauge-wrapper {
+    margin: 6rem 0 0 0;
   }
 }
 
@@ -268,7 +278,7 @@
 .description-text {
   font-size: 1.875em;
   line-height: 30px;
-  text-shadow: 0px 2px 9px rgba(255, 255, 255, 0.6);
+  text-shadow: 0 2px 9px rgba(255, 255, 255, 0.6);
 }
 
 .fixed-layer {
@@ -344,6 +354,8 @@
 }
 
 .cards-wrapper {
+  position: relative;
+  left: -2%;
   width: 104%;
   padding: 0 2%;
   display: flex;
@@ -353,7 +365,6 @@
 }
 
 .cards-wrapper .card {
-  position: relative;
   width: 353px;
   height: 256px;
   margin: 1rem 0.25rem;
@@ -367,7 +378,8 @@
 
 .cards-wrapper .card:hover {
   cursor: pointer;
-  transition: 1.8s;
+  position: relative;
+  top: -4px;
 }
 
 .cards-wrapper .card:hover .card-text {
@@ -422,6 +434,10 @@
   overflow: hidden;
 }
 
+.card-image img {
+  width: 100%;
+}
+
 .card-image .corner-text {
   position: absolute;
   bottom: 0;
@@ -440,6 +456,8 @@
 }
 
 .text-container {
+  height: 66px;
+  overflow: hidden;
   width: 100%;
   color: white;
 }

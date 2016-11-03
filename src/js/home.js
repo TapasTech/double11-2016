@@ -22,32 +22,7 @@ $(function () {
     }
 
     function loadDynamicData() {
-        // load total-amout and mobile ratio data from OSS
-        /*$.ajax({
-            url: './data.txt',
-            success: function (data) {
-                var dataFiltered = data.split('\n').filter(isValid);
-                function isValid(str) {
-                    if (str.length > 2) {
-                        return str;
-                    }
-                }
-                var indexTotal = dataFiltered.indexOf('total_amount');
-                var indexMobile = dataFiltered.indexOf('mobile_ratio');
-                var arrTotal = dataFiltered.slice(indexTotal + 1, indexMobile);
-                var arrMobile = dataFiltered.slice(indexMobile + 1, dataFiltered.length + 1);
-
-                /!*for (var i = 0; i<arrMobile.length; i++) {
-
-                }*!/
-
-                if (!arrTotal) {
-                    return;
-                }
-                console.log(arrMobile);
-            }
-        });*/
-
+        // load total-amount and mobile ratio data from OSS
         var dataUrl;
         if (env == 'dev') {
             dataUrl = "./data-test.json";
@@ -60,7 +35,6 @@ $(function () {
                 if (!json) {
                     return;
                 }
-
                 var dataArray = json.data;
                 var dataArrLength = dataArray.length;
                 if (dataArrLength <= 0) {
@@ -122,7 +96,13 @@ $(function () {
                 $gmvTime.html(formateDate(new Date(time)));
                 $gaugeTime.html(formateDate(new Date(time)));
                 counter++;
-                $gvmNumber.html( ( number * counter/numTimeSteps ).toFixed(0) );
+                var gmv = ( number * counter/numTimeSteps ).toFixed(0);
+                $gvmNumber.html( gmv );
+                if (gmv >= 1000) {
+                    $gvmNumber.addClass('size-reduced');
+                } else {
+                    $gvmNumber.removeClass('size-reduced');
+                }
                 $mobileRatio.html( (mobileRatio * counter/numTimeSteps).toFixed(0) );
             }, numIntervals);
             setTimeout(function() {
@@ -218,17 +198,31 @@ $(function () {
     }
 
     function loadEventImages() {
-        // load images (from image1.png to image5.png)
-        for (var i = 1; i <= 5; i++) {
-            $('<img/>').attr('src', 'images/image' + i + '.png').load(function (i) {
+        // load images (from image4.png to image5.png)
+        var maxImages = 5;
+        var emptyImages = 0;
+        var numLoaded = 0;
+        var counter = 1;
+        var timeInterval = 100; // ms
+        var imageInterval = setInterval(function () {
+            $('<img/>').attr('src', 'images/image' + counter + '.png').error(function () {
+                emptyImages++;
+            }).on('load', function (i) {
                 $(this).remove(); // prevent memory leaks
                 $('#remoteImageWrapper').append('<div class="images">' + i.target.outerHTML + '</div>');
+                numLoaded++;
             });
-        }
-        if ($('#remoteImageWrapper .images').length == 0) {
-            $('#remoteImageWrapper').append('<div class="images"><img class="img-default" src="images/data-trend-default.png"></div>' +
-                '<div class="text-under-image">更多数据敬请期待...</div>');
-        }
+            counter++;
+            if (counter > maxImages) {
+                clearInterval(imageInterval);
+            }
+        }, timeInterval);
+        setTimeout(function () {
+            if (numLoaded == 0) {
+                $('#remoteImageWrapper').append('<div class="images"><img class="img-default" src="images/data-trend-default.png"></div>' +
+                    '<div class="text-under-image">更多数据敬请期待...</div>');
+            }
+        }, timeInterval * (1 + maxImages))
     }
 
     function loadArticleData() {
