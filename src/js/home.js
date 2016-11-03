@@ -7,7 +7,7 @@ $(function () {
     var env = 'prod';
 
     var CLOCK_POINT_WIDTH = 16;
-
+    var timeStamp = new Date().getTime();
     init();
 
     function init() {
@@ -55,7 +55,7 @@ $(function () {
             dataUrl = "./data.json";
         }
         $.ajax({
-            url: dataUrl,
+            url: dataUrl + ("?timestapm=" + timeStamp),
             success: function(json) {
                 if (!json) {
                     return;
@@ -253,7 +253,7 @@ $(function () {
             articleApiUrl = 'http://www.dtcj.com/web_api/topics/shuang_11_zhuan_ti?max=50';
         }
         $.ajax({
-            url: articleApiUrl,
+            url: articleApiUrl + "?time=" + timeStamp,
             success: function (json) {
                 json.data.forEach(function (value, index) {
                     for (var j = 0; j < typeArr.length; j++) {

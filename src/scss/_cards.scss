@@ -32,7 +32,7 @@
 }
 
 .card-image {
-  @include div-with-bgImage('../images/image-test.png');
+  @include div-with-bgImage('');
   position: relative;
   width: 100%;
   height: $card-image-height;
