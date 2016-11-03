@@ -15,7 +15,7 @@ body {
   padding: 0;
   background: $bg-color;
   color: $font-color;
-  font-family: "PingFang SC";
+  font-family: "PingFang SC", "Microsoft YaHei";
   overflow-x: hidden;
 }
 
@@ -59,6 +59,7 @@ img, .images {
   .wrapper {
     width: $PC-wrapper-width;
     margin: auto;
+    padding: 0 $PC-wrapper-padding;
   }
   .nav-mobile {
     display: none;
@@ -122,6 +123,7 @@ img, .images {
   content: '';
   display: block;
   border-top: 1px solid #ccc;
+  opacity: 0.3;
   margin: 2rem 0;
   height: 2rem;
 }
@@ -133,16 +135,22 @@ img, .images {
 
 .pages {
   text-align: center;
+  margin: auto;
 
   .content-wrapper {
-    margin: 80px 0 60px 0;
+    margin: 80px 0 40px 0;
     @media #{$mobile} {
       margin-top: 120px;
     }
 
-    .remote-image-wrapper {
+    .images {
       margin: 3rem 0 1rem 0;
     }
+
+    .img-default {
+      width: 305px;
+    }
+
   }
 
   .subtitles {

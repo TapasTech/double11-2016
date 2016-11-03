@@ -45,7 +45,7 @@
         <div class="clock-wrapper">
             <div class="clock-group">
                 <div class="clock-elements">
-                    <span class="GMV-title">GMV</span>
+                    <img  class="GMV-title" src="images/GMV.png">
                     <div class="clock-partials" id="graduationWrapper"></div>
                     <div class="clock-partials">
                         <div class="clock-background-wrapper">
@@ -58,8 +58,8 @@
                     <div class="clock-partials">
                         <div class="inner-ring"></div>
                     </div>
-                    <div class="clock-partials"><span id="GMV-number">???</span></div>
-                    <div class="clock-partials"><span id="GMV-time">14:23:54</span></div>
+                    <div class="clock-partials"><span class="gmv-number" id="GMV-number">???</span></div>
+                    <div class="clock-partials"><span id="GMV-time">??:??:??</span></div>
                     <div class="clock-partials unit-text">亿元</div>
                     <div class="GMV-indicator">
                         <svg width="199px" height="35px" viewBox="522 649 199 35" version="1.1"
@@ -69,7 +69,7 @@
                         </svg>
                         <div class="clock-description">
                             <div class="description-title">2016天猫11.11购物狂欢节</div>
-                            <div class="description-text">总成交额</div>
+                            <div class="description-text">商品交易额</div>
                         </div>
                     </div>
                 </div>
@@ -84,8 +84,12 @@
                 <div class="gauge-partials">
                     <div id="progressBar"></div>
                 </div>
-                <div class="gauge-partials">
-                    <div class="gauge-number"><span id="mobileRatio">???</span><span id="percentSymbol">%</span></div>
+                <div class="gauge-partials gauge-indicators">
+                    <div class="gauge-time" id="gaugeTime">??:??:??</div>
+                    <div class="gauge-number">
+                        <span id="mobileRatio">??</span>
+                        <span id="percentSymbol">%</span>
+                    </div>
                 </div>
                 <div class="mobile-indicator">
                     <svg width="199px" height="35px" viewBox="971 403 199 35" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -93,22 +97,20 @@
                     </svg>
                     <div class="gauges-description">
                         <div class="description-title">2016天猫11.11购物狂欢节</div>
-                        <div class="description-text">总成交额</div>
+                        <div class="description-text">无线成交占比</div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="content-wrapper">
-            <div id="divDataTrend" class="remote-image-wrapper"></div>
-            <div id="divGlobalData" class="remote-image-wrapper"></div>
-            <div id="divNationalData" class="remote-image-wrapper"></div>
+        <div class="content-wrapper" id="remoteImageWrapper">
+
         </div>
     </div>
 
     <div class="pages" id="page2">
         <h4 class='subtitles'>2016天猫11.11购物狂欢节</h4>
-        <h3 class="description">跟踪报道</h3>
+        <h3 class="description">双11剁手进行时</h3>
 
         <a style="display: block" href="#" target="_blank"><div class="images video"></div></a>
         <div class="video-text waiting">敬请期待...</div>
@@ -130,7 +132,7 @@
 
     <div class="pages" id="page4">
         <h4 class='subtitles'>2016天猫11.11购物狂欢节</h4>
-        <h3 class="description">大数据洞察</h3>
+        <h3 class="description">双11大数据洞察</h3>
 
         <div class="cards-wrapper cards-collapsed"></div>
 
@@ -143,6 +145,15 @@
 <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
 <script src="js/home.js"></script>
 <script src="common/js/circle-progress.min.js"></script>
+
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-66946541-7', 'auto');
+    ga('send', 'pageview');
+</script>
 
 </body>
 </html>

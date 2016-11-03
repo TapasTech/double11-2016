@@ -39,14 +39,6 @@
   font-size: 1.5rem;
 }
 
-.clock-wrapper .clock-group .clock-elements .shiny-point {
-  position: absolute;
-  width: 16px;
-  height: 16px;
-  top: 50%;
-  left: 50%;
-}
-
 .clock-wrapper .clock-group .clock-elements .clock-partials {
   position: absolute;
   display: flex;
@@ -120,20 +112,30 @@
 
 .clock-wrapper .clock-group .clock-elements .shiny-point {
   position: absolute;
-  width: 16px;
-  height: 16px;
-  background-color: #fff;
-  border-radius: 50%;
-  box-shadow: 0 0 6px;
+  top: 50%;
+  left: 50%;
+  width: 24px;
+  height: 24px;
   z-index: 10;
+  background-image: url("../images/graduation_normal.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
 }
 
 .clock-wrapper .clock-group .clock-elements .shiny-point:hover {
+  background-image: url("../images/graduation_hover.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
   cursor: pointer;
 }
 
 .clock-wrapper .clock-group .clock-elements .shiny-point.active {
-  background-color: #FF5733;
+  background-image: url("../images/graduation_hover.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
 }
 
 .clock-wrapper #GMV-time {
@@ -142,10 +144,14 @@
   font-size: 24px;
 }
 
-.clock-wrapper #GMV-number {
+.clock-wrapper .gmv-number {
   font-size: 120px;
   font-weight: 600;
   text-shadow: 0 0 14px;
+}
+
+.clock-wrapper .size-reduced {
+  font-size: 96px;
 }
 
 .gauge-wrapper {
@@ -160,6 +166,12 @@
     position: relative;
     width: 100vw;
     margin: 4rem 0 0 0;
+  }
+}
+
+@media (max-width: 320px) {
+  .gauge-wrapper {
+    margin: 6rem 0 0 0;
   }
 }
 
@@ -180,7 +192,7 @@
 .gauge-wrapper .gauge-partials {
   position: absolute;
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
   width: 100%;
@@ -200,7 +212,13 @@
   background-position: center center;
 }
 
+.gauge-wrapper .gauge-partials .gauge-time {
+  position: relative;
+  top: -12px;
+}
+
 .gauge-wrapper .gauge-partials .gauge-number {
+  line-height: 42px;
   margin-left: 8px;
 }
 
@@ -212,7 +230,7 @@
 .gauge-wrapper #mobileRatio {
   font-size: 48px;
   font-weight: 400;
-  text-shadow: 0 0 8px;
+  text-shadow: 0 0 12px rgba(255, 255, 255, 0.6);
 }
 
 .gauge-wrapper .mobile-indicator {
@@ -240,6 +258,18 @@
   }
 }
 
+@media (max-width: 1000px) {
+  .gauge-wrapper .gauges-description {
+    margin: 0 0 0 -16px;
+  }
+}
+
+@media (max-width: 880px) {
+  .gauge-wrapper .gauges-description {
+    margin: 0 0 0 -32px;
+  }
+}
+
 .description-title {
   font-size: 1.25em;
   line-height: 30px;
@@ -248,7 +278,7 @@
 .description-text {
   font-size: 1.875em;
   line-height: 30px;
-  text-shadow: 0px 2px 9px rgba(255, 255, 255, 0.6);
+  text-shadow: 0 2px 9px rgba(255, 255, 255, 0.6);
 }
 
 .fixed-layer {
@@ -310,7 +340,7 @@
     height: 0;
     margin: 0 0 0 5px;
     border-top: 5px solid transparent;
-    border-right: 8px solid #fff;
+    border-right: 8px solid #FF5733;
     border-bottom: 5px solid transparent;
   }
   .fixed-layer .anchors.active:hover {
@@ -324,7 +354,10 @@
 }
 
 .cards-wrapper {
-  margin: 1rem 0;
+  position: relative;
+  left: -2%;
+  width: 104%;
+  padding: 0 2%;
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
@@ -333,7 +366,10 @@
 
 .cards-wrapper .card {
   width: 353px;
+  height: 256px;
   margin: 1rem 0.25rem;
+  z-index: 1;
+  overflow: visible;
   display: flex;
   flex-flow: column nowrap;
   justify-content: flex-start;
@@ -343,32 +379,63 @@
 .cards-wrapper .card:hover {
   cursor: pointer;
   position: relative;
-  top: -3px;
-  transition: 0.45s;
+  top: -4px;
 }
 
 .cards-wrapper .card:hover .card-text {
   background: #763930;
 }
 
-.cards-wrapper .card:hover .card-image {
-  background-size: 103% 103%;
-  transition: 0.25s;
-}
-
 .cards-wrapper .card:hover .text-container {
   z-index: -10;
 }
 
-.card-image {
-  background-image: url("../images/image-test.png");
+.cards-wrapper .card:hover .card-frame-img {
+  display: block;
+}
+
+.cards-wrapper .card:hover .card-image:after {
+  background: rgba(255, 87, 51, 0.3);
+}
+
+.cards-wrapper .card .card-hover-frame {
+  position: relative;
+  overflow: visible;
+}
+
+.cards-wrapper .card .card-frame-img {
+  display: none;
+  position: absolute;
+  background-image: url("../images/card-wrapper-frame.png");
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: center center;
+  height: 112.5%;
+  width: 110%;
+  left: -5%;
+  top: -6.25%;
+}
+
+@media (max-width: 720px) {
+  .cards-wrapper .card .card-frame-img {
+    display: none !important;
+  }
+}
+
+.card-image {
   position: relative;
   width: 100%;
   height: 156px;
   z-index: -10;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.card-image img {
+  width: 100%;
 }
 
 .card-image .corner-text {
@@ -379,10 +446,19 @@
   color: #FF5733;
 }
 
-.text-container {
+.card-image:after {
+  content: '';
   width: 100%;
-  height: 100px;
-  flex-grow: 1;
+  height: 100%;
+  background: rgba(255, 0, 0, 0);
+  position: absolute;
+  top: 0;
+}
+
+.text-container {
+  height: 66px;
+  overflow: hidden;
+  width: 100%;
   color: white;
 }
 
@@ -462,7 +538,7 @@ body {
   padding: 0;
   background: black;
   color: white;
-  font-family: "PingFang SC";
+  font-family: "PingFang SC", "Microsoft YaHei";
   overflow-x: hidden;
 }
 
@@ -507,8 +583,9 @@ img, .images {
 
 @media screen and (min-width: 720px) {
   .wrapper {
-    width: 732px;
+    width: 756px;
     margin: auto;
+    padding: 0 12px;
   }
   .nav-mobile {
     display: none;
@@ -573,6 +650,7 @@ img, .images {
   content: '';
   display: block;
   border-top: 1px solid #ccc;
+  opacity: 0.3;
   margin: 2rem 0;
   height: 2rem;
 }
@@ -584,10 +662,11 @@ img, .images {
 
 .pages {
   text-align: center;
+  margin: auto;
 }
 
 .pages .content-wrapper {
-  margin: 80px 0 60px 0;
+  margin: 80px 0 40px 0;
 }
 
 @media (max-width: 720px) {
@@ -596,8 +675,12 @@ img, .images {
   }
 }
 
-.pages .content-wrapper .remote-image-wrapper {
+.pages .content-wrapper .images {
   margin: 3rem 0 1rem 0;
+}
+
+.pages .content-wrapper .img-default {
+  width: 305px;
 }
 
 .pages .subtitles {
@@ -652,7 +735,7 @@ img, .images {
 }
 
 .pages .video {
-  width: 732px;
+  width: 756px;
   max-width: 731px;
   height: 371px;
   background-image: url("../images/video.png");

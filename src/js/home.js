@@ -6,8 +6,8 @@ $(function () {
 
     var env = 'prod';
 
-    var CLOCK_POINT_WIDTH = 16;
-
+    var CLOCK_POINT_WIDTH = 24;
+    var timeStamp = new Date().getTime();
     init();
 
     function init() {
@@ -22,32 +22,7 @@ $(function () {
     }
 
     function loadDynamicData() {
-        // load total-amout and mobile ratio data from OSS
-        /*$.ajax({
-            url: './data.txt',
-            success: function (data) {
-                var dataFiltered = data.split('\n').filter(isValid);
-                function isValid(str) {
-                    if (str.length > 2) {
-                        return str;
-                    }
-                }
-                var indexTotal = dataFiltered.indexOf('total_amount');
-                var indexMobile = dataFiltered.indexOf('mobile_ratio');
-                var arrTotal = dataFiltered.slice(indexTotal + 1, indexMobile);
-                var arrMobile = dataFiltered.slice(indexMobile + 1, dataFiltered.length + 1);
-
-                /!*for (var i = 0; i<arrMobile.length; i++) {
-
-                }*!/
-
-                if (!arrTotal) {
-                    return;
-                }
-                console.log(arrMobile);
-            }
-        });*/
-
+        // load total-amount and mobile ratio data from OSS
         var dataUrl;
         if (env == 'dev') {
             dataUrl = "./data-test.json";
@@ -55,12 +30,11 @@ $(function () {
             dataUrl = "./data.json";
         }
         $.ajax({
-            url: dataUrl,
+            url: dataUrl + ("?timestapm=" + timeStamp),
             success: function(json) {
                 if (!json) {
                     return;
                 }
-
                 var dataArray = json.data;
                 var dataArrLength = dataArray.length;
                 if (dataArrLength <= 0) {
@@ -107,6 +81,7 @@ $(function () {
 
         // update GMV data
         var $gmvTime = $('#GMV-time');
+        var $gaugeTime = $('#gaugeTime');
         var $gvmNumber = $('#GMV-number');
         var $mobileRatio = $('#mobileRatio');
 
@@ -119,8 +94,15 @@ $(function () {
             var counter = 0;
             var interval = setInterval(function() {
                 $gmvTime.html(formateDate(new Date(time)));
+                $gaugeTime.html(formateDate(new Date(time)));
                 counter++;
-                $gvmNumber.html( ( number * counter/numTimeSteps ).toFixed(0) );
+                var gmv = ( number * counter/numTimeSteps ).toFixed(0);
+                $gvmNumber.html( gmv );
+                if (gmv >= 1000) {
+                    $gvmNumber.addClass('size-reduced');
+                } else {
+                    $gvmNumber.removeClass('size-reduced');
+                }
                 $mobileRatio.html( (mobileRatio * counter/numTimeSteps).toFixed(0) );
             }, numIntervals);
             setTimeout(function() {
@@ -178,8 +160,8 @@ $(function () {
         $('.btn-load-more').click(function () {
             var $cardsWrapper = $(this).addClass('hidden').parent().find('.cards-wrapper');
             $cardsWrapper.removeClass('cards-collapsed');
-            $('.card-image').each(function () {
-                $(this).attr('style', 'background-image: url(' + $(this).attr('data-image') + ')');
+            $('.card-image img').each(function () {
+                $(this).attr('src', $(this).attr('data-image'));
             });
         });
 
@@ -192,10 +174,8 @@ $(function () {
             if (!scrollTriggered) {
                 lastScrollY = window.scrollY;
                 scrollTriggered = true;
-
                 setTimeout(function () {
                     currentScrollY = window.scrollY;
-
                     if (currentScrollY > lastScrollY) {  // scrolling down
                         for (var i=1; i<=4; i++) {
                             if ($('#page' + i).isVisible(offset)) {
@@ -203,7 +183,7 @@ $(function () {
                                 $('a[href=#page' + i +']').addClass('active');
                             }
                         }
-                    } else {
+                    } else {  // scrolling up
                         for (var j=4; j>0; j--) {
                             if ($('#page' + j).isVisible(offset)) {
                                 $anchors.removeClass('active');
@@ -211,7 +191,6 @@ $(function () {
                             }
                         }
                     }
-
                     scrollTriggered = false;
                 }, 0.3 * 1000);
             }
@@ -219,30 +198,35 @@ $(function () {
     }
 
     function loadEventImages() {
-        // trend data image
-        $('<img/>').attr('src', 'images/data-trend.png').load(function() {
-            $(this).remove(); // prevent memory leaks
-            $('#divDataTrend').append('<div class="image-title"><h4 class="subtitles">2016天猫11.11购物狂欢节</h4>' +
-                '<h3 class="description">总成交额趋势</h3></div><img src="images/data-trend.png"/>');
-        }).error(function() {
-            $('#divDataTrend').append('<div id="data-trend-default"><div class="images"><img src="images/data-trend-default.png"></div><div class="text-under-image">更多数据敬请期待...</div></div>');
-        });
-        // global data image
-        $('<img/>').attr('src', 'images/global-data.png').load(function() {
-            $(this).remove(); // prevent memory leaks
-            $('#divGlobalData').append('<div class="image-title"><h4 class="subtitles">2016天猫11.11购物狂欢节</h4><h3 class="description">' +
-                '全球交易国家/地区排行</h3></div><div class="images"><img src="images/global-data-test.png"></div>');
-        });
-        // national data image
-        $('<img/>').attr('src', 'images/national-data.png').load(function() {
-            $(this).remove(); // prevent memory leaks
-            $('#divNationalData').append('<div class="image-title"><h4 class="subtitles">2016天猫11.11购物狂欢节</h4><h3 class="description">' +
-                '全天交易额省份TOP10</h3></div><div class="images"><img src="images/national-data-test.png"/></div>');
-        });
+        // load images (from image4.png to image5.png)
+        var maxImages = 5;
+        var emptyImages = 0;
+        var numLoaded = 0;
+        var counter = 1;
+        var timeInterval = 100; // ms
+        var imageInterval = setInterval(function () {
+            $('<img/>').attr('src', 'images/image' + counter + '.png').error(function () {
+                emptyImages++;
+            }).on('load', function (i) {
+                $(this).remove(); // prevent memory leaks
+                $('#remoteImageWrapper').append('<div class="images">' + i.target.outerHTML + '</div>');
+                numLoaded++;
+            });
+            counter++;
+            if (counter > maxImages) {
+                clearInterval(imageInterval);
+            }
+        }, timeInterval);
+        setTimeout(function () {
+            if (numLoaded == 0) {
+                $('#remoteImageWrapper').append('<div class="images"><img class="img-default" src="images/data-trend-default.png"></div>' +
+                    '<div class="text-under-image">更多数据敬请期待...</div>');
+            }
+        }, timeInterval * (1 + maxImages))
     }
 
     function loadArticleData() {
-        var typeArr = ['双11剁手进行时','消费新边界','大数据洞察'];
+        var typeArr = ['双11剁手进行时','消费新边界智库','大数据洞察'];
         var numTypes = typeArr.length;
         var articleArr = [];
         for (var i = 0; i < numTypes; i++) {
@@ -256,7 +240,7 @@ $(function () {
             articleApiUrl = 'http://www.dtcj.com/web_api/topics/shuang_11_zhuan_ti?max=50';
         }
         $.ajax({
-            url: articleApiUrl,
+            url: articleApiUrl + "?time=" + timeStamp,
             success: function (json) {
                 json.data.forEach(function (value, index) {
                     for (var j = 0; j < typeArr.length; j++) {
@@ -277,16 +261,13 @@ $(function () {
                     var json;
                     for (var i = 0; i < numArticles; i++) {
                         json = articleArr[i];
-                        if (i < numInitial) {
-                            cardsHtml += '<a class="card" target="_self" href="' + json.url + '"><div class="card-image" data-image="' + json.thumbnail + '" style="background-image: url(' + json.thumbnail +
-                                ')"><span class="corner-text">' + json.keyword_to_display.split('| ')[1] + '</span></div><div class="text-container"><div class="card-text">' +
-                                json.title + '</div></div></a>';
-                        } else {
-                            cardsHtml += '<a class="card" target="_self" href="' + json.url + '"><div class="card-image" data-image="' + json.thumbnail +
-                                '"><span class="corner-text">' + json.keyword_to_display.split('| ')[1] + '</span></div><div class="text-container"><div class="card-text">' +
-                                json.title + '</div></div></a>';
+                        cardsHtml += '<a class="card" target="_self" href="' + json.url + '"><div class="card-hover-frame"><div class="card-frame-img"></div><div class="card-image"' +
+                            '"><img ';
+                        if (i<numInitial) {
+                            cardsHtml += 'src="' + json.thumbnail + '"';
                         }
-
+                        cardsHtml += ' data-image="' + json.thumbnail +'"><span class="corner-text">' + json.keyword_to_display.split('| ')[1] + '</span></div><div class="text-container"><div class="card-text">' +
+                            json.title + '</div></div></div></a>';
                     }
                     // insert articles into pages
                     var $cardsWrapper = $('#page' + pageNumber + ' .cards-wrapper');
@@ -295,8 +276,7 @@ $(function () {
                     if (numArticles <= numInitial) {
                         $('#page' + pageNumber + ' .btn-load-more').addClass('hidden');
                     }
-
-                    // display default image if no article published
+                    // display default image if no article published (on page 4 only)
                     if (numArticles === 0 && pageNumber === 4) {
                         $cardsWrapper.after('' +'<div class="images"><img class="img-last-page" src="images/big-data-inspection.png"></div>' +
                             '<div class="default-bottom-text">双十一年鉴<br>敬请期待</div>');
@@ -305,7 +285,6 @@ $(function () {
             }
         });
     }
-
 });
 
 $.fn.isVisible = function (offset) {
