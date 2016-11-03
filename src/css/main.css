@@ -182,7 +182,7 @@
 .gauge-wrapper .gauge-partials {
   position: absolute;
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
   width: 100%;
@@ -202,7 +202,13 @@
   background-position: center center;
 }
 
+.gauge-wrapper .gauge-partials .gauge-time {
+  position: relative;
+  top: -12px;
+}
+
 .gauge-wrapper .gauge-partials .gauge-number {
+  line-height: 42px;
   margin-left: 8px;
 }
 
@@ -214,7 +220,7 @@
 .gauge-wrapper #mobileRatio {
   font-size: 48px;
   font-weight: 400;
-  text-shadow: 0 0 8px;
+  text-shadow: 0 0 12px rgba(255, 255, 255, 0.6);
 }
 
 .gauge-wrapper .mobile-indicator {
@@ -384,6 +390,11 @@
   width: 100%;
   height: 156px;
   z-index: -10;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
 }
 
 .card-image .corner-text {
@@ -614,6 +625,10 @@ img, .images {
 
 .pages .content-wrapper .images {
   margin: 3rem 0 1rem 0;
+}
+
+.pages .content-wrapper .img-default {
+  width: 305px;
 }
 
 .pages .subtitles {

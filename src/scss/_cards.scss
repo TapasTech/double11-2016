@@ -38,6 +38,8 @@
   width: 100%;
   height: $card-image-height;
   z-index: -10;
+  @include my-flex($flow:column nowrap, $justify:center, $align:center);
+  overflow: hidden;
 
   .corner-text {
     position: absolute;

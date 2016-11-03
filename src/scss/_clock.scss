@@ -141,7 +141,7 @@
 
   .gauge-partials {
     position: absolute;
-    @include my-flex($justify: center, $align: center);
+    @include my-flex($flow: column nowrap, $justify: center, $align: center);
     width: 100%;
     height: 100%;
 
@@ -153,7 +153,13 @@
       @include div-with-bgImage('../images/gauge-mobile.png');
     }
 
+    .gauge-time {
+      position: relative;
+      top: -12px;
+    }
+
     .gauge-number {
+      line-height: 42px;
       margin-left: 8px;
     }
   }
@@ -166,7 +172,7 @@
   #mobileRatio {
     font-size: 48px;
     font-weight: 400;
-    text-shadow: 0 0 8px;
+    text-shadow: 0 0 12px rgba(255,255,255,0.60);
   }
 
   .mobile-indicator {

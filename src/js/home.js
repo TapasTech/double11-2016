@@ -107,6 +107,7 @@ $(function () {
 
         // update GMV data
         var $gmvTime = $('#GMV-time');
+        var $gaugeTime = $('#gaugeTime');
         var $gvmNumber = $('#GMV-number');
         var $mobileRatio = $('#mobileRatio');
 
@@ -119,6 +120,7 @@ $(function () {
             var counter = 0;
             var interval = setInterval(function() {
                 $gmvTime.html(formateDate(new Date(time)));
+                $gaugeTime.html(formateDate(new Date(time)));
                 counter++;
                 $gvmNumber.html( ( number * counter/numTimeSteps ).toFixed(0) );
                 $mobileRatio.html( (mobileRatio * counter/numTimeSteps).toFixed(0) );
@@ -178,8 +180,8 @@ $(function () {
         $('.btn-load-more').click(function () {
             var $cardsWrapper = $(this).addClass('hidden').parent().find('.cards-wrapper');
             $cardsWrapper.removeClass('cards-collapsed');
-            $('.card-image').each(function () {
-                $(this).attr('style', 'background-image: url(' + $(this).attr('data-image') + ')');
+            $('.card-image img').each(function () {
+                $(this).attr('src', $(this).attr('data-image'));
             });
         });
 
@@ -218,10 +220,14 @@ $(function () {
     function loadEventImages() {
         // load images (from image1.png to image5.png)
         for (var i = 1; i <= 5; i++) {
-            $('<img/>').attr('src', 'images/image'+ i + '.png').load(function(i) {
+            $('<img/>').attr('src', 'images/image' + i + '.png').load(function (i) {
                 $(this).remove(); // prevent memory leaks
-                $('#remoteImageWrapper').append('<div class="images">' + i.target.outerHTML +'</div>');
+                $('#remoteImageWrapper').append('<div class="images">' + i.target.outerHTML + '</div>');
             });
+        }
+        if ($('#remoteImageWrapper .images').length == 0) {
+            $('#remoteImageWrapper').append('<div class="images"><img class="img-default" src="images/data-trend-default.png"></div>' +
+                '<div class="text-under-image">更多数据敬请期待...</div>');
         }
     }
 
@@ -261,15 +267,13 @@ $(function () {
                     var json;
                     for (var i = 0; i < numArticles; i++) {
                         json = articleArr[i];
-                        if (i < numInitial) {
-                            cardsHtml += '<a class="card" target="_self" href="' + json.url + '"><div class="card-image" data-image="' + json.thumbnail + '" style="background-image: url(' + json.thumbnail +
-                                ')"><span class="corner-text">' + json.keyword_to_display.split('| ')[1] + '</span></div><div class="text-container"><div class="card-text">' +
-                                json.title + '</div></div></a>';
-                        } else {
-                            cardsHtml += '<a class="card" target="_self" href="' + json.url + '"><div class="card-image" data-image="' + json.thumbnail +
-                                '"><span class="corner-text">' + json.keyword_to_display.split('| ')[1] + '</span></div><div class="text-container"><div class="card-text">' +
-                                json.title + '</div></div></a>';
+                        cardsHtml += '<a class="card" target="_self" href="' + json.url + '"><div class="card-image"' +
+                            '"><img ';
+                        if (i<numInitial) {
+                            cardsHtml += 'src="' + json.thumbnail + '"';
                         }
+                        cardsHtml += ' data-image="' + json.thumbnail +'"><span class="corner-text">' + json.keyword_to_display.split('| ')[1] + '</span></div><div class="text-container"><div class="card-text">' +
+                            json.title + '</div></div></a>';
                     }
                     // insert articles into pages
                     var $cardsWrapper = $('#page' + pageNumber + ' .cards-wrapper');
@@ -278,7 +282,6 @@ $(function () {
                     if (numArticles <= numInitial) {
                         $('#page' + pageNumber + ' .btn-load-more').addClass('hidden');
                     }
-
                     // display default image if no article published (on page 4 only)
                     if (numArticles === 0 && pageNumber === 4) {
                         $cardsWrapper.after('' +'<div class="images"><img class="img-last-page" src="images/big-data-inspection.png"></div>' +
