@@ -191,6 +191,12 @@
       font-size: 80%;
       margin-left: 0;
     }
+    @media #{$PC-small} {
+      margin: 0 0 0 -16px;
+    }
+    @media #{$tablet} {
+      margin: 0 0 0 -32px;
+    }
     margin-left: 4em;
     text-align: left;
     white-space: nowrap;

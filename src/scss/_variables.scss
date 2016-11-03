@@ -5,6 +5,8 @@ $PC-wrapper-width: 732px;
 $mobile: "(max-width:" + $PC-threshold + ")";
 $iphone5: "(max-width: 320px)";
 $PC: "(min-width:" + $PC-threshold + ")";
+$PC-small: "(max-width: 1000px)";
+$tablet: "(max-width: 880px)";
 
 // background
 $bg-color: rgba(0,0,0,1);

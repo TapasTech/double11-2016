@@ -192,10 +192,8 @@ $(function () {
             if (!scrollTriggered) {
                 lastScrollY = window.scrollY;
                 scrollTriggered = true;
-
                 setTimeout(function () {
                     currentScrollY = window.scrollY;
-
                     if (currentScrollY > lastScrollY) {  // scrolling down
                         for (var i=1; i<=4; i++) {
                             if ($('#page' + i).isVisible(offset)) {
@@ -203,7 +201,7 @@ $(function () {
                                 $('a[href=#page' + i +']').addClass('active');
                             }
                         }
-                    } else {
+                    } else {  // scrolling up
                         for (var j=4; j>0; j--) {
                             if ($('#page' + j).isVisible(offset)) {
                                 $anchors.removeClass('active');
@@ -211,7 +209,6 @@ $(function () {
                             }
                         }
                     }
-
                     scrollTriggered = false;
                 }, 0.3 * 1000);
             }
@@ -286,7 +283,6 @@ $(function () {
                                 '"><span class="corner-text">' + json.keyword_to_display.split('| ')[1] + '</span></div><div class="text-container"><div class="card-text">' +
                                 json.title + '</div></div></a>';
                         }
-
                     }
                     // insert articles into pages
                     var $cardsWrapper = $('#page' + pageNumber + ' .cards-wrapper');
@@ -296,7 +292,7 @@ $(function () {
                         $('#page' + pageNumber + ' .btn-load-more').addClass('hidden');
                     }
 
-                    // display default image if no article published
+                    // display default image if no article published (on page 4 only)
                     if (numArticles === 0 && pageNumber === 4) {
                         $cardsWrapper.after('' +'<div class="images"><img class="img-last-page" src="images/big-data-inspection.png"></div>' +
                             '<div class="default-bottom-text">双十一年鉴<br>敬请期待</div>');
@@ -305,7 +301,6 @@ $(function () {
             }
         });
     }
-
 });
 
 $.fn.isVisible = function (offset) {

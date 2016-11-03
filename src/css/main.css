@@ -240,6 +240,18 @@
   }
 }
 
+@media (max-width: 1000px) {
+  .gauge-wrapper .gauges-description {
+    margin: 0 0 0 -16px;
+  }
+}
+
+@media (max-width: 880px) {
+  .gauge-wrapper .gauges-description {
+    margin: 0 0 0 -32px;
+  }
+}
+
 .description-title {
   font-size: 1.25em;
   line-height: 30px;
