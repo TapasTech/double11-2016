@@ -138,6 +138,10 @@
   background-position: center center;
 }
 
+.clock-wrapper .clock-group .clock-elements .shiny-point.last {
+  filter: hue-rotate(45deg);
+}
+
 .clock-wrapper #GMV-time {
   position: relative;
   top: -84px;
@@ -374,6 +378,7 @@
   flex-flow: column nowrap;
   justify-content: flex-start;
   align-items: flex-start;
+  transition: all 0.8s ease;
 }
 
 .cards-wrapper .card:hover {

@@ -41,8 +41,12 @@ $(function () {
                     return;
                 }
                 var graduationHtml = '';
+                var isLast = false;
                 for(var i=0; i<dataArrLength; i++) {
-                    graduationHtml += generatePoint(dataArray[i]);
+                    if (i == dataArrLength-1) {
+                        isLast = true;
+                    }
+                    graduationHtml += generatePoint(dataArray[i], isLast);
                 }
 
                 $('#graduationWrapper').append(graduationHtml);
@@ -52,18 +56,32 @@ $(function () {
                     animateClock(dataArray[dataArrLength-1].GMV, dataArray[dataArrLength-1].time, dataArray[dataArrLength-1].mobile_ratio);
                 }, 0.8 * 1000);
 
-                $('.shiny-point').on('mouseenter', function() {
-                    $('.shiny-point').removeClass('active');
+                var $shinyPoint= $('.shiny-point');
+                $shinyPoint.on('mouseenter', function() {
                     var $this = $(this);
+                    $shinyPoint.removeClass('active');
                     $this.addClass('active');
                     animateClock($this.attr('data-gmv'), $this.attr('data-time'), $this.attr('data-mobile-ratio'));
                 });
+                $shinyPoint.on('mouseout', function() {
+                    if (window.innerWidth > 720) {
+                        var $this = $(this);
+                        var order = $shinyPoint.index($this);
+                        if (order != $shinyPoint.length-1) {  // not the latest point
+                            $this.removeClass('active');
+                            var $last = $('.shiny-point:last');
+                            $last.addClass('active');
+                            animateClock($last.attr('data-gmv'), $last.attr('data-time'), $last.attr('data-mobile-ratio'));
+                        }
+                    }
+                });
+
 
                 function calcHour(time) {
                     return time.getHours() + time.getMinutes()/60;
                 }
 
-                function generatePoint(data) {
+                function generatePoint(data, isLast) {
                     var clockRadius = 136;   // px, assuming clock size is fixed
                     var angle = calcHour(new Date(data.time)) / 24 * ( 2 * Math.PI);
                     var trans = [
@@ -73,8 +91,13 @@ $(function () {
                     trans = trans.map(function (point) {
                         return (point - CLOCK_POINT_WIDTH / 2) + 'px';
                     });
-                    return '<div class="shiny-point" data-time="' + data.time + '" data-gmv="' + data.GMV +
+                    var html = '<div class="shiny-point';
+                    if (isLast) {
+                        html += ' last';
+                    }
+                    html += '" data-time="' + data.time + '" data-gmv="' + data.GMV +
                         '" data-mobile-ratio="' + data.mobile_ratio + '" style="transform:translate(' + trans[0] + ',' + trans[1] + ')" ></div>';
+                    return html;
                 }
             }
         });

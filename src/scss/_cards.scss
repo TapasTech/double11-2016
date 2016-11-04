@@ -16,9 +16,9 @@
     z-index: 1;
     overflow: visible;
     @include my-flex($flow:column nowrap, $justify: flex-start);
+    transition: all 0.8s ease;
 
     &:hover {
-
       cursor: pointer;
       position: relative;
       top: -4px;
