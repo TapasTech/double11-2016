@@ -193,6 +193,7 @@ img, .images {
   }
 
   .video {
+    position: relative;
     width: $PC-wrapper-width;
     max-width: 731px;
     height: 371px;
@@ -201,7 +202,11 @@ img, .images {
       width: 100vw;
       height: 371/731 * 100vw;
     }
+  }
 
+  .video-link {
+    display: block;
+    position:relative;
   }
 
   .img-last-page {

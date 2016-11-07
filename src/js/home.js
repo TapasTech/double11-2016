@@ -10,6 +10,12 @@ $(function () {
     var timeStamp = new Date().getTime();
     init();
 
+    // load default icon image for wechat environment
+    if (navigator.userAgent.match(/MicroMessenger/i)) {
+        var weixinShareLogo = 'http://1111.dtcj.com/images/wechatShare.jpg';
+        $('body').prepend('<div style=" overflow:hidden; width:0px; height:0; margin:0 auto; position:absolute; top:-800px;"><img src="' + weixinShareLogo + '"></div>')
+    }
+
     function init() {
         // load GMV and mobile-ratio data
         loadDynamicData();
@@ -266,6 +272,13 @@ $(function () {
             url: articleApiUrl + "?time=" + timeStamp,
             success: function (json) {
                 json.data.forEach(function (value, index) {
+                    // load initial video image and title
+                    if (value.id == '5820089e67157b0726c4194d') {
+                        $('#beforeRealTime').after('<a class="video-link" href="'+ value.url + '" target="_blank">' +
+                            '<div class="images video" style="background-image: url('+ value.thumbnail + ')">' +
+                            '<span class="corner-text">' + value.keyword_to_display + '</span></div></a>' +
+                            '<div class="video-text waiting">' + value.title + '</div>')
+                    }
                     for (var j = 0; j < typeArr.length; j++) {
                         if (value.keyword_to_display.indexOf(typeArr[j]) >= 0) {
                             articleArr[j].push(value);
