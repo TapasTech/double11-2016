@@ -93,6 +93,7 @@
         width: $graduation-diameter;
         height: $graduation-diameter;
         z-index:10;
+        //opacity: 0.8;
         @include div-with-bgImage('../images/graduation_normal.png');
 
         &:hover {
@@ -101,6 +102,11 @@
         }
         &.active {
           @include div-with-bgImage('../images/graduation_hover.png');
+        }
+        &.last {
+          //opacity: 1;
+          //filter: grayscale(1);
+          filter: hue-rotate(90deg);
         }
       }
     }
@@ -211,7 +217,8 @@
 }
 
 .description-text {
-  font-size: 30/16 * 1em;
+  //font-size: 30/16 * 1em;
+  font-size: 30px;
   line-height: 30px;
   text-shadow: 0 2px 9px rgba(255, 255, 255, 0.60);
 }

@@ -7,6 +7,7 @@
   width: 104%;
   padding: 0 2%;
   @include my-flex($flow:row wrap);
+  flex-wrap: wrap;
 
   .card {
     //position: relative;
@@ -16,9 +17,9 @@
     z-index: 1;
     overflow: visible;
     @include my-flex($flow:column nowrap, $justify: flex-start);
+    transition: all 0.8s ease;
 
     &:hover {
-
       cursor: pointer;
       position: relative;
       top: -4px;
@@ -40,6 +41,7 @@
     .card-hover-frame {
       position: relative;
       overflow: visible;
+      width: 100%;
     }
 
     .card-frame-img {

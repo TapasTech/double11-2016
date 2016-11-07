@@ -10,8 +10,8 @@
 
   @media #{$PC} {
     #logo {
-      width: 39px;
-      height: 13px;
+      width: 77px;
+      height: 26px;
       @include div-with-bgImage('../images/Logo.png');
       left: 1rem;
       top: 1rem;

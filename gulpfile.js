@@ -10,6 +10,8 @@ var cache = require('gulp-cache');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var minify = require('gulp-minify');
+var postCss = require('gulp-postcss');
+var autoprefixer = require('autoprefixer');
 var streamqueue = require('streamqueue');
 
 var rev = require('gulp-rev'); //- 对文件名加MD5后缀
@@ -21,10 +23,26 @@ var browserSync = require('browser-sync').create();
 var del = require('del');
 var runSequence = require('run-sequence');
 
+const AUTOPREFIXER_BROWSERS = [
+    'Android 2.3',
+    'Android >= 4',
+    'Chrome >= 35',
+    'Firefox >= 31',
+    'Explorer >= 9',
+    'iOS >= 7',
+    'Opera >= 12',
+    'Safari >= 7.1',
+];
+
 gulp.task('sass', function () {
     return gulp.src(['src/scss/*.scss'])
         .pipe(sass({outputStyle: 'expanded'}))  // nested, expanded, compact, compressed
         .on('error', sass.logError)
+        .pipe(postCss([
+            autoprefixer({
+                browsers: AUTOPREFIXER_BROWSERS,
+            }),
+        ]))
         .pipe(gulp.dest('src/css'))
         .pipe(browserSync.reload({
             stream: true

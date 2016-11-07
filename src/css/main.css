@@ -3,10 +3,21 @@
 }
 
 .clock-wrapper .clock-group {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
-  align-items: center;
+  -webkit-flex-flow: column nowrap;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
   position: absolute;
   top: 0;
   left: 0;
@@ -41,10 +52,21 @@
 
 .clock-wrapper .clock-group .clock-elements .clock-partials {
   position: absolute;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
-  flex-flow: row nowrap;
-  justify-content: center;
-  align-items: center;
+  -webkit-flex-flow: row nowrap;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
   width: 356px;
   height: 356px;
 }
@@ -59,7 +81,8 @@
   width: 356px;
   height: 356px;
   background-image: url("../images/clock-bg.png");
-  background-size: 100% 100%;
+  -webkit-background-size: 100% 100%;
+          background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: center center;
   position: absolute;
@@ -69,7 +92,8 @@
   width: 327.52px;
   height: 327.52px;
   background-image: url("../images/outer-ring.png");
-  background-size: 100% 100%;
+  -webkit-background-size: 100% 100%;
+          background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: center center;
 }
@@ -78,7 +102,8 @@
   width: 302.6px;
   height: 302.6px;
   background-image: url("../images/inner-ring.png");
-  background-size: 100% 100%;
+  -webkit-background-size: 100% 100%;
+          background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: center center;
 }
@@ -92,10 +117,21 @@
   position: relative;
   left: -100px;
   top: 10px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
-  align-items: center;
+  -webkit-flex-flow: column nowrap;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .clock-wrapper .clock-group .clock-elements .GMV-indicator .clock-description {
@@ -118,14 +154,16 @@
   height: 24px;
   z-index: 10;
   background-image: url("../images/graduation_normal.png");
-  background-size: 100% 100%;
+  -webkit-background-size: 100% 100%;
+          background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: center center;
 }
 
 .clock-wrapper .clock-group .clock-elements .shiny-point:hover {
   background-image: url("../images/graduation_hover.png");
-  background-size: 100% 100%;
+  -webkit-background-size: 100% 100%;
+          background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: center center;
   cursor: pointer;
@@ -133,9 +171,15 @@
 
 .clock-wrapper .clock-group .clock-elements .shiny-point.active {
   background-image: url("../images/graduation_hover.png");
-  background-size: 100% 100%;
+  -webkit-background-size: 100% 100%;
+          background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: center center;
+}
+
+.clock-wrapper .clock-group .clock-elements .shiny-point.last {
+  -webkit-filter: hue-rotate(90deg);
+          filter: hue-rotate(90deg);
 }
 
 .clock-wrapper #GMV-time {
@@ -155,10 +199,21 @@
 }
 
 .gauge-wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
-  flex-flow: row nowrap;
-  justify-content: center;
-  align-items: flex-start;
+  -webkit-flex-flow: row nowrap;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+  -webkit-align-items: flex-start;
+      -ms-flex-align: start;
+          align-items: flex-start;
 }
 
 @media (max-width: 720px) {
@@ -191,23 +246,46 @@
 
 .gauge-wrapper .gauge-partials {
   position: absolute;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
-  align-items: center;
+  -webkit-flex-flow: column nowrap;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
   width: 100%;
   height: 100%;
 }
 
 .gauge-wrapper .gauge-partials .gauge-bg {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
-  flex-flow: row nowrap;
-  justify-content: center;
-  align-items: center;
+  -webkit-flex-flow: row nowrap;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
   width: 226px;
   height: 226px;
   background-image: url("../images/gauge-mobile.png");
-  background-size: 100% 100%;
+  -webkit-background-size: 100% 100%;
+          background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: center center;
 }
@@ -276,7 +354,7 @@
 }
 
 .description-text {
-  font-size: 1.875em;
+  font-size: 30px;
   line-height: 30px;
   text-shadow: 0 2px 9px rgba(255, 255, 255, 0.6);
 }
@@ -285,19 +363,31 @@
   position: fixed;
   top: 0;
   height: 100vh;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
-  flex-flow: column;
-  justify-content: center;
-  align-items: flex-start;
+  -webkit-flex-flow: column;
+      -ms-flex-flow: column;
+          flex-flow: column;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+  -webkit-align-items: flex-start;
+      -ms-flex-align: start;
+          align-items: flex-start;
   z-index: 100;
 }
 
 @media (min-width: 720px) {
   .fixed-layer #logo {
-    width: 39px;
-    height: 13px;
+    width: 77px;
+    height: 26px;
     background-image: url("../images/Logo.png");
-    background-size: 100% 100%;
+    -webkit-background-size: 100% 100%;
+            background-size: 100% 100%;
     background-repeat: no-repeat;
     background-position: center center;
     left: 1rem;
@@ -305,19 +395,41 @@
     position: fixed;
   }
   .fixed-layer .nav-wrapper {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
     display: flex;
     height: 100vh;
-    flex-flow: column;
-    justify-content: center;
+    -webkit-flex-flow: column;
+        -ms-flex-flow: column;
+            flex-flow: column;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+        -ms-flex-pack: center;
+            justify-content: center;
     width: 240px;
   }
   .fixed-layer nav {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
     display: flex;
-    flex-flow: column nowrap;
-    justify-content: center;
-    align-items: flex-start;
+    -webkit-flex-flow: column nowrap;
+        -ms-flex-flow: column nowrap;
+            flex-flow: column nowrap;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: start;
+    -webkit-align-items: flex-start;
+        -ms-flex-align: start;
+            align-items: flex-start;
     position: absolute;
     width: 200px;
+    background: -webkit-gradient(linear, left top, right top, from(black), to(transparent));
+    background: -webkit-linear-gradient(left, black, transparent);
+    background: -o-linear-gradient(left, black, transparent);
     background: linear-gradient(to right, black, transparent);
     z-index: 100;
   }
@@ -325,10 +437,21 @@
     margin: 0.3rem 0 0.3rem 1rem;
     text-decoration: none;
     color: #aaaaaa;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
     display: flex;
-    flex-flow: row nowrap;
-    justify-content: flex-start;
-    align-items: center;
+    -webkit-flex-flow: row nowrap;
+        -ms-flex-flow: row nowrap;
+            flex-flow: row nowrap;
+    -webkit-box-pack: start;
+    -webkit-justify-content: flex-start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center;
   }
   .fixed-layer .anchors.active {
     color: #ffffff;
@@ -349,6 +472,8 @@
   .fixed-layer .anchors:hover {
     cursor: pointer;
     color: #ffffff;
+    -webkit-transition: 0.25s;
+    -o-transition: 0.25s;
     transition: 0.25s;
   }
 }
@@ -358,10 +483,24 @@
   left: -2%;
   width: 104%;
   padding: 0 2%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between;
-  align-items: flex-start;
+  -webkit-flex-flow: row wrap;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: start;
+  -webkit-align-items: flex-start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
 }
 
 .cards-wrapper .card {
@@ -370,10 +509,24 @@
   margin: 1rem 0.25rem;
   z-index: 1;
   overflow: visible;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
-  flex-flow: column nowrap;
-  justify-content: flex-start;
-  align-items: flex-start;
+  -webkit-flex-flow: column nowrap;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: start;
+  -webkit-align-items: flex-start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-transition: all 0.8s ease;
+  -o-transition: all 0.8s ease;
+  transition: all 0.8s ease;
 }
 
 .cards-wrapper .card:hover {
@@ -401,13 +554,15 @@
 .cards-wrapper .card .card-hover-frame {
   position: relative;
   overflow: visible;
+  width: 100%;
 }
 
 .cards-wrapper .card .card-frame-img {
   display: none;
   position: absolute;
   background-image: url("../images/card-wrapper-frame.png");
-  background-size: 100% 100%;
+  -webkit-background-size: 100% 100%;
+          background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: center center;
   height: 112.5%;
@@ -427,10 +582,21 @@
   width: 100%;
   height: 156px;
   z-index: -10;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
-  align-items: center;
+  -webkit-flex-flow: column nowrap;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
   overflow: hidden;
 }
 
@@ -466,10 +632,21 @@
   width: 100%;
   min-height: 66px;
   overflow: hidden;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
-  flex-flow: row nowrap;
-  justify-content: flex-start;
-  align-items: center;
+  -webkit-flex-flow: row nowrap;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
   text-align: justify;
 }
 
@@ -490,44 +667,120 @@
 
 .btn-load-more:hover {
   cursor: pointer;
-  box-shadow: inset 0 0 6px 2px #FF5733;
+  -webkit-box-shadow: inset 0 0 6px 2px #FF5733;
+          box-shadow: inset 0 0 6px 2px #FF5733;
 }
 
 .outer-ring {
-  animation: outerRing 3.5s 0.7s cubic-bezier(0.17, 0.37, 0.5, 0.75) infinite;
+  -webkit-animation: outerRing 3.5s 0.7s cubic-bezier(0.17, 0.37, 0.5, 0.75) infinite;
+       -o-animation: outerRing 3.5s 0.7s cubic-bezier(0.17, 0.37, 0.5, 0.75) infinite;
+          animation: outerRing 3.5s 0.7s cubic-bezier(0.17, 0.37, 0.5, 0.75) infinite;
+}
+
+@-webkit-keyframes outerRing {
+  0 {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  50% {
+    -webkit-transform: rotate(180deg);
+            transform: rotate(180deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+@-o-keyframes outerRing {
+  0 {
+    -o-transform: rotate(0deg);
+       transform: rotate(0deg);
+  }
+  50% {
+    -o-transform: rotate(180deg);
+       transform: rotate(180deg);
+  }
+  100% {
+    -o-transform: rotate(360deg);
+       transform: rotate(360deg);
+  }
 }
 
 @keyframes outerRing {
   0 {
-    transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+         -o-transform: rotate(0deg);
+            transform: rotate(0deg);
   }
   50% {
-    transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+         -o-transform: rotate(180deg);
+            transform: rotate(180deg);
   }
   100% {
-    transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+         -o-transform: rotate(360deg);
+            transform: rotate(360deg);
   }
 }
 
 .inner-ring {
-  animation: innerRing 3.5s 0.7s cubic-bezier(0.17, 0.37, 0.5, 0.75) infinite;
+  -webkit-animation: innerRing 3.5s 0.7s cubic-bezier(0.17, 0.37, 0.5, 0.75) infinite;
+       -o-animation: innerRing 3.5s 0.7s cubic-bezier(0.17, 0.37, 0.5, 0.75) infinite;
+          animation: innerRing 3.5s 0.7s cubic-bezier(0.17, 0.37, 0.5, 0.75) infinite;
+}
+
+@-webkit-keyframes innerRing {
+  0 {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  50% {
+    -webkit-transform: rotate(-180deg);
+            transform: rotate(-180deg);
+  }
+  100% {
+    -webkit-transform: rotate(-360deg);
+            transform: rotate(-360deg);
+  }
+}
+
+@-o-keyframes innerRing {
+  0 {
+    -o-transform: rotate(0deg);
+       transform: rotate(0deg);
+  }
+  50% {
+    -o-transform: rotate(-180deg);
+       transform: rotate(-180deg);
+  }
+  100% {
+    -o-transform: rotate(-360deg);
+       transform: rotate(-360deg);
+  }
 }
 
 @keyframes innerRing {
   0 {
-    transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+         -o-transform: rotate(0deg);
+            transform: rotate(0deg);
   }
   50% {
-    transform: rotate(-180deg);
+    -webkit-transform: rotate(-180deg);
+         -o-transform: rotate(-180deg);
+            transform: rotate(-180deg);
   }
   100% {
-    transform: rotate(-360deg);
+    -webkit-transform: rotate(-360deg);
+         -o-transform: rotate(-360deg);
+            transform: rotate(-360deg);
   }
 }
 
 * {
   -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
   -ms-box-sizing: border-box;
   -o-box-sizing: border-box;
   box-sizing: border-box;
@@ -558,16 +811,28 @@ img, .images {
   left: 0;
   width: 100vw;
   height: 100vh;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
-  flex-flow: row nowrap;
-  justify-content: center;
-  align-items: center;
+  -webkit-flex-flow: row nowrap;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
   z-index: -100;
 }
 
 .background .full-moon {
   background: url(../images/full-moon.png) center center no-repeat;
-  background-size: 100%;
+  -webkit-background-size: 100% 100%;
+          background-size: 100%;
   width: 595px;
   height: 573px;
   margin: auto;
@@ -598,7 +863,10 @@ img, .images {
     margin: auto;
   }
   .cards-wrapper {
-    justify-content: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+        -ms-flex-pack: center;
+            justify-content: center;
   }
   #navBar {
     display: none;
@@ -611,24 +879,46 @@ img, .images {
   }
   .nav-mobile .nav-mobile-header {
     padding: 3vw 2vw 2vw 2vw;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
     display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-between;
-    align-items: center;
+    -webkit-flex-flow: row nowrap;
+        -ms-flex-flow: row nowrap;
+            flex-flow: row nowrap;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center;
   }
   .nav-mobile .nav-mobile-header .menu-icon {
     display: inline-block;
-    width: 32px;
+    width: 37px;
     height: 32px;
     padding: 4px;
   }
   .nav-mobile .drop-down-list {
     border-top: 1px solid #404040;
     background: #000;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
     display: flex;
-    flex-flow: column nowrap;
-    justify-content: flex-start;
-    align-items: flex-start;
+    -webkit-flex-flow: column nowrap;
+        -ms-flex-flow: column nowrap;
+            flex-flow: column nowrap;
+    -webkit-box-pack: start;
+    -webkit-justify-content: flex-start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+    -webkit-box-align: start;
+    -webkit-align-items: flex-start;
+        -ms-flex-align: start;
+            align-items: flex-start;
     height: 100vh;
     padding-left: 2rem;
     display: flex;
@@ -701,7 +991,8 @@ img, .images {
   max-width: 100%;
   height: 64px;
   background-image: url("../images/data-trend-default.png");
-  background-size: 100% 100%;
+  -webkit-background-size: 100% 100%;
+          background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: center center;
   margin: auto;
@@ -711,7 +1002,8 @@ img, .images {
   width: 744px;
   height: 82px;
   background-image: url("../images/data-trend.png");
-  background-size: 100% 100%;
+  -webkit-background-size: 100% 100%;
+          background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: center center;
 }
@@ -720,7 +1012,8 @@ img, .images {
   width: 807px;
   height: 441px;
   background-image: url("../images/global-trend.png");
-  background-size: 100% 100%;
+  -webkit-background-size: 100% 100%;
+          background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: center center;
 }
@@ -729,7 +1022,8 @@ img, .images {
   width: 807px;
   height: 441px;
   background-image: url("../images/global-trend.png");
-  background-size: 100% 100%;
+  -webkit-background-size: 100% 100%;
+          background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: center center;
 }
@@ -739,7 +1033,8 @@ img, .images {
   max-width: 731px;
   height: 371px;
   background-image: url("../images/video.png");
-  background-size: 100% 100%;
+  -webkit-background-size: 100% 100%;
+          background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: center center;
 }
