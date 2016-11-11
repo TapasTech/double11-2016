@@ -11,7 +11,7 @@ $(function () {
     init();
 
     // load default icon image for wechat environment
-    if (navigator.userAgent.match(/MicroMessenger/i)) {
+    if (navigator.userAgent.match(/MicroMessenger|DingTalk/i)) {
         var weixinShareLogo = 'http://1111.dtcj.com/images/wechatShare.jpg';
         $('body').prepend('<div style=" overflow:hidden; width:0px; height:0; margin:0 auto; position:absolute; top:-800px;"><img src="' + weixinShareLogo + '"></div>')
     }
