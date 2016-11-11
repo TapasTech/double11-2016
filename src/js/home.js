@@ -210,14 +210,14 @@ $(function () {
                         for (var i=1; i<=4; i++) {
                             if ($('#page' + i).isVisible(offset)) {
                                 $anchors.removeClass('active');
-                                $('a[href=#page' + i +']').addClass('active');
+                                $($anchors[i-1]).addClass('active');
                             }
                         }
                     } else {  // scrolling up
                         for (var j=4; j>0; j--) {
                             if ($('#page' + j).isVisible(offset)) {
                                 $anchors.removeClass('active');
-                                $('a[href=#page' + j +']').addClass('active');
+                                $($anchors[j-1]).addClass('active');
                             }
                         }
                     }
@@ -233,13 +233,21 @@ $(function () {
         var emptyImages = 0;
         var numLoaded = 0;
         var counter = 1;
-        var timeInterval = 100; // ms
+        var timeInterval = 1; // ms
+
+        var imageWrapperDivs = '';
+        for (var j=0; j<maxImages; j++) {
+            imageWrapperDivs += '<div class="images" id="imageWrapper' + Number(j+1) + '"></div>';
+        }
+        $('#remoteImageWrapper').append(imageWrapperDivs);
+
         var imageInterval = setInterval(function () {
             $('<img/>').attr('src', ROOT + '/images/image' + counter + '.png').error(function () {
                 emptyImages++;
             }).on('load', function (i) {
                 $(this).remove(); // prevent memory leaks
-                $('#remoteImageWrapper').append('<div class="images">' + i.target.outerHTML + '</div>');
+                var orderImage = i.target.outerHTML.split('/images/image')[1].split('.png')[0];
+                $('#imageWrapper' + orderImage).append(i.target.outerHTML);
                 numLoaded++;
             });
             counter++;
@@ -252,7 +260,7 @@ $(function () {
                 $('#remoteImageWrapper').append('<div class="images"><img class="img-default" src="'+ROOT+'/images/data-trend-default.png"></div>' +
                     '<div class="text-under-image">更多数据敬请期待...</div>');
             }
-        }, timeInterval * (1 + maxImages))
+        }, 2*1000)
     }
 
     function loadArticleData() {
