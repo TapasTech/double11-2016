@@ -7,12 +7,13 @@ $(function () {
     var env = 'prod';
 
     var CLOCK_POINT_WIDTH = 24;
+    var ROOT = location.protocol + '//1111-dtcj-com.oss-cn-hangzhou.aliyuncs.com';
     var timeStamp = new Date().getTime();
     init();
 
     // load default icon image for wechat environment
-    if (navigator.userAgent.match(/MicroMessenger|DingTalk/i)) {
-        var weixinShareLogo = 'http://1111.dtcj.com/images/wechatShare.jpg';
+    if (navigator.userAgent.match(/MicroMessenger/i)) {
+        var weixinShareLogo = ROOT+'/images/wechatShare.jpg';
         $('body').prepend('<div style=" overflow:hidden; width:0px; height:0; margin:0 auto; position:absolute; top:-800px;"><img src="' + weixinShareLogo + '"></div>')
     }
 
@@ -31,9 +32,9 @@ $(function () {
         // load total-amount and mobile ratio data from OSS
         var dataUrl;
         if (env == 'dev') {
-            dataUrl = "./data-test.json";
+            dataUrl = ROOT + "/data-test.json";
         } else {
-            dataUrl = "./data.json";
+            dataUrl = ROOT + "/data.json";
         }
         $.ajax({
             url: dataUrl + ("?timestapm=" + timeStamp),
@@ -209,14 +210,14 @@ $(function () {
                         for (var i=1; i<=4; i++) {
                             if ($('#page' + i).isVisible(offset)) {
                                 $anchors.removeClass('active');
-                                $('a[href=#page' + i +']').addClass('active');
+                                $($anchors[i-1]).addClass('active');
                             }
                         }
                     } else {  // scrolling up
                         for (var j=4; j>0; j--) {
                             if ($('#page' + j).isVisible(offset)) {
                                 $anchors.removeClass('active');
-                                $('a[href=#page' + j +']').addClass('active');
+                                $($anchors[j-1]).addClass('active');
                             }
                         }
                     }
@@ -232,13 +233,21 @@ $(function () {
         var emptyImages = 0;
         var numLoaded = 0;
         var counter = 1;
-        var timeInterval = 100; // ms
+        var timeInterval = 1; // ms
+
+        var imageWrapperDivs = '';
+        for (var j=0; j<maxImages; j++) {
+            imageWrapperDivs += '<div class="images" id="imageWrapper' + Number(j+1) + '"></div>';
+        }
+        $('#remoteImageWrapper').append(imageWrapperDivs);
+
         var imageInterval = setInterval(function () {
-            $('<img/>').attr('src', 'images/image' + counter + '.png').error(function () {
+            $('<img/>').attr('src', ROOT + '/images/image' + counter + '.png').error(function () {
                 emptyImages++;
             }).on('load', function (i) {
                 $(this).remove(); // prevent memory leaks
-                $('#remoteImageWrapper').append('<div class="images">' + i.target.outerHTML + '</div>');
+                var orderImage = i.target.outerHTML.split('/images/image')[1].split('.png')[0];
+                $('#imageWrapper' + orderImage).append(i.target.outerHTML);
                 numLoaded++;
             });
             counter++;
@@ -248,10 +257,10 @@ $(function () {
         }, timeInterval);
         setTimeout(function () {
             if (numLoaded == 0) {
-                $('#remoteImageWrapper').append('<div class="images"><img class="img-default" src="images/data-trend-default.png"></div>' +
+                $('#remoteImageWrapper').append('<div class="images"><img class="img-default" src="'+ROOT+'/images/data-trend-default.png"></div>' +
                     '<div class="text-under-image">更多数据敬请期待...</div>');
             }
-        }, timeInterval * (1 + maxImages))
+        }, 2*1000)
     }
 
     function loadArticleData() {
@@ -266,7 +275,7 @@ $(function () {
         if (env=='dev') {
             articleApiUrl = '../json/mock_api_articles.json';
         } else {
-            articleApiUrl = 'http://www.dtcj.com/web_api/topics/shuang_11_zhuan_ti?max=50';
+            articleApiUrl = '/web_api/topics/shuang_11_zhuan_ti?max=50';
         }
         $.ajax({
             url: articleApiUrl + "?time=" + timeStamp,
@@ -314,7 +323,7 @@ $(function () {
                     }
                     // display default image if no article published (on page 4 only)
                     if (numArticles === 0 && pageNumber === 4) {
-                        $cardsWrapper.after('' +'<div class="images"><img class="img-last-page" src="images/big-data-inspection.png"></div>' +
+                        $cardsWrapper.after('' +'<div class="images"><img class="img-last-page" src="'+ROOT+'/images/big-data-inspection.png"></div>' +
                             '<div class="default-bottom-text">双十一年鉴<br>敬请期待</div>');
                     }
                 }

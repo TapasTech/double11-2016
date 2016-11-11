@@ -47,20 +47,20 @@
       .clock-bg {
         width: $clock-width;
         height: $clock-height;
-        @include div-with-bgImage('../images/clock-bg.png');
+        @include div-with-bgImage('//1111-dtcj-com.oss-cn-hangzhou.aliyuncs.com/images/clock-bg.png');
         position:absolute;
       }
       .outer-ring {
         $outer-ring-size-factor: 0.92;
         width: $clock-width * $outer-ring-size-factor;
         height: $clock-height * $outer-ring-size-factor;
-        @include div-with-bgImage('../images/outer-ring.png');
+        @include div-with-bgImage('//1111-dtcj-com.oss-cn-hangzhou.aliyuncs.com/images/outer-ring.png');
       }
       .inner-ring {
         $inner-ring-size-factor: 0.85;
         width: $clock-width * $inner-ring-size-factor;
         height: $clock-height * $inner-ring-size-factor;
-        @include div-with-bgImage('../images/inner-ring.png');
+        @include div-with-bgImage('//1111-dtcj-com.oss-cn-hangzhou.aliyuncs.com/images/inner-ring.png');
       }
 
       .unit-text {
@@ -94,14 +94,14 @@
         height: $graduation-diameter;
         z-index:10;
         //opacity: 0.8;
-        @include div-with-bgImage('../images/graduation_normal.png');
+        @include div-with-bgImage('//1111-dtcj-com.oss-cn-hangzhou.aliyuncs.com/images/graduation_normal.png');
 
         &:hover {
-          @include div-with-bgImage('../images/graduation_hover.png');
+          @include div-with-bgImage('//1111-dtcj-com.oss-cn-hangzhou.aliyuncs.com/images/graduation_hover.png');
           cursor: pointer;
         }
         &.active {
-          @include div-with-bgImage('../images/graduation_hover.png');
+          @include div-with-bgImage('//1111-dtcj-com.oss-cn-hangzhou.aliyuncs.com/images/graduation_hover.png');
         }
         &.last {
           //opacity: 1;
@@ -160,7 +160,7 @@
       $gauge-size: 226px;
       width: $gauge-size;
       height: $gauge-size;
-      @include div-with-bgImage('../images/gauge-mobile.png');
+      @include div-with-bgImage('//1111-dtcj-com.oss-cn-hangzhou.aliyuncs.com/images/gauge-mobile.png');
     }
 
     .gauge-time {

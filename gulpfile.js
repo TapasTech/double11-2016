@@ -9,6 +9,7 @@ var imagemin = require('gulp-imagemin');
 var cache = require('gulp-cache');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
+var babel = require('gulp-babel');
 var minify = require('gulp-minify');
 var postCss = require('gulp-postcss');
 var autoprefixer = require('autoprefixer');
@@ -54,6 +55,9 @@ gulp.task('jshint', function() {
     return gulp.src('src/js/*.js')
         .pipe(jshint())
         .pipe(jshint.reporter('default'))
+        /*.pipe(babel({
+            presets: ['es2015']
+        }))*/
 });
 
 // minify images
@@ -98,9 +102,10 @@ gulp.task('default', function() {
 // uglify JS and pipe to dist
 gulp.task('uglify', function() {
     return gulp.src('src/js/*.js')
-        .pipe(jshint())
-        .pipe(jshint.reporter('default'))
         // .pipe(revCollector({replaceReved: true}))
+        .pipe(babel({
+            presets: ['es2015']
+        }))
         .pipe(uglify())
         .pipe(rev())
         .pipe(gulp.dest('dist/js'))
