@@ -50,7 +50,7 @@
         display: none !important;
       }
       position: absolute;
-      @include div-with-bgImage('../images/card-wrapper-frame.png');
+      @include div-with-bgImage('//1111-dtcj-com.oss-cn-hangzhou.aliyuncs.com/images/card-wrapper-frame.png');
       $offset: 10%;
       height: 100% + $offset*1.25;
       width: 100% + $offset;

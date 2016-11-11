@@ -39,7 +39,7 @@ img, .images {
   z-index: -100;
 
   .full-moon {
-    background: url(../images/full-moon.png) center center no-repeat;
+    background: url(//1111-dtcj-com.oss-cn-hangzhou.aliyuncs.com/images/full-moon.png) center center no-repeat;
     background-size: 100%;
     width: 595px;
     height: 573px;
@@ -171,25 +171,25 @@ img, .images {
     width: 305px;
     max-width: 100%;
     height: 64px;
-    @include div-with-bgImage('../images/data-trend-default.png');
+    @include div-with-bgImage('//1111-dtcj-com.oss-cn-hangzhou.aliyuncs.com/images/data-trend-default.png');
     margin: auto;
   }
 
   .data-trend {
     width: 744px;
     height: 82px;
-    @include div-with-bgImage('../images/data-trend.png');
+    @include div-with-bgImage('//1111-dtcj-com.oss-cn-hangzhou.aliyuncs.com/images/data-trend.png');
   }
 
   .global-data {
     width: 807px;
     height: 441px;
-    @include div-with-bgImage('../images/global-trend.png');
+    @include div-with-bgImage('//1111-dtcj-com.oss-cn-hangzhou.aliyuncs.com/images/global-trend.png');
   }
   .national-data {
     width: 807px;
     height: 441px;
-    @include div-with-bgImage('../images/global-trend.png');
+    @include div-with-bgImage('//1111-dtcj-com.oss-cn-hangzhou.aliyuncs.com/images/global-trend.png');
   }
 
   .video {
@@ -197,7 +197,7 @@ img, .images {
     width: $PC-wrapper-width;
     max-width: 731px;
     height: 371px;
-    @include div-with-bgImage('../images/video.png');
+    @include div-with-bgImage('//1111-dtcj-com.oss-cn-hangzhou.aliyuncs.com/images/video.png');
     @media #{$mobile} {
       width: 100vw;
       height: 371/731 * 100vw;
