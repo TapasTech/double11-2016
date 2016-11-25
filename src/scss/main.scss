@@ -58,7 +58,7 @@ img, .images {
 @media screen and (min-width: $PC-threshold) {
   .wrapper {
     width: $PC-wrapper-width;
-    margin: auto;
+    margin: 0 auto 48px auto;
     padding: 0 $PC-wrapper-padding;
   }
   .nav-mobile {
@@ -70,7 +70,7 @@ img, .images {
 @media #{$mobile} {
   .wrapper {
     width: 100%;
-    margin: auto;
+    margin: 0 auto 48px auto;
   }
   .cards-wrapper {
     justify-content: center;
@@ -239,6 +239,76 @@ img, .images {
   .default-bottom-text {
     margin: 1rem 0 4rem 0;
     color: $theme-orange;
+  }
+
+
+  .annual-area {
+    width: 100%;
+    margin: 30px auto 90px auto;
+    display: flex;
+
+    background: rgba(255,255,255,0.05);
+    $w-logo: 293px;
+    $h-logo: 167px;
+
+    .logo-annual {
+      margin: auto;
+      @include div-with-bgImage('http://1111-dtcj-com.oss-cn-hangzhou.aliyuncs.com/images/annual-logo.png');
+    }
+    .info-annual {
+      @media #{$PC} {
+        position: relative;
+        top: 22px;
+      }
+      text-align: left;
+      .annual-title {
+        color: $theme-orange;
+      }
+      .annual-detail {
+        color: #fff;
+      }
+    }
+
+
+    @media #{$PC} {
+      flex-direction: row;
+      justify-content: space-around;
+      align-items: center;
+      height: 289px;
+      .logo-annual {
+        width: $w-logo;
+        height: $h-logo;
+        margin: 0 0 0 16px;
+        flex-shrink: 0;
+      }
+      .info-annual {
+        margin: 30px 24px 12px 24px;
+        align-self: flex-start;
+        flex-shrink: 1;
+        width: auto;
+      }
+    }
+    @media #{$mobile} {
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      height: auto;
+
+      $_w: 80vw;
+      .logo-annual {
+        margin-top: 5vw;
+        width: $_w;
+        height: $_w * $h-logo/$w-logo;
+      }
+      .info-annual {
+        margin: (100vw - 80vw)/2;
+      }
+    }
+
+
+
+
+
   }
 
 }
