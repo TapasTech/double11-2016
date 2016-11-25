@@ -8,6 +8,7 @@ $(function () {
 
     var CLOCK_POINT_WIDTH = 24;
     var ROOT = location.protocol + '//1111-dtcj-com.oss-cn-hangzhou.aliyuncs.com';
+    // var ROOT = './';
     var timeStamp = new Date().getTime();
     init();
 
